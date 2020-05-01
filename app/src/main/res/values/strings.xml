@@ -4,4 +4,6 @@
     <string name="title_fav">Favourites</string>
     <string name="title_all">All</string>
     <string name="title_profile">Profile</string>
+
+    <string name="icon_fav">Profile</string>
 </resources>
