@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">SourPowerLisi</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">SourPower</string>
+    <string name="title_home">Daily Specials</string>
+    <string name="title_fav">Favourites</string>
+    <string name="title_all">All</string>
+    <string name="title_profile">Profile</string>
 </resources>
