@@ -1,4 +1,4 @@
-package com.example.sourpower.ui.dashboard;
+package com.example.sourpower.ui.favourites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

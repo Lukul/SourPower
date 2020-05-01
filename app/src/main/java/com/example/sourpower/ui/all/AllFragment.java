@@ -1,4 +1,4 @@
-package com.example.sourpower.ui.notifications;
+package com.example.sourpower.ui.all;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

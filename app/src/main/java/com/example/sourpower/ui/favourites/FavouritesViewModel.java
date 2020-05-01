@@ -1,4 +1,4 @@
-package com.example.sourpower.ui.dashboard;
+package com.example.sourpower.ui.favourites;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

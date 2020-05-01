@@ -1,4 +1,4 @@
-package com.example.sourpower.ui.home;
+package com.example.sourpower.ui.dailyspec;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

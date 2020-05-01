@@ -1,4 +1,4 @@
-package com.example.sourpower.ui.home;
+package com.example.sourpower.ui.dailyspec;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

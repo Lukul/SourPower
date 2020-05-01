@@ -3,29 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_dailyspec">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.sourpower.ui.home.DailySpecFragment"
+        android:id="@+id/navigation_dailyspec"
+        android:name="com.example.sourpower.ui.dailyspec.DailySpecFragment"
         android:label="@string/title_dailyspec"
         tools:layout="@layout/fragment_dailyspec" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.sourpower.ui.dashboard.FavouritesFragment"
+        android:id="@+id/navigation_favourites"
+        android:name="com.example.sourpower.ui.favourites.FavouritesFragment"
         android:label="@string/title_fav"
         tools:layout="@layout/fragment_favourites" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.sourpower.ui.notifications.AllFragment"
+        android:id="@+id/navigation_all"
+        android:name="com.example.sourpower.ui.all.AllFragment"
         android:label="@string/title_all"
         tools:layout="@layout/fragment_all" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.sourpower.ui.notifications.AllFragment"
+        android:name="com.example.sourpower.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_all" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>
