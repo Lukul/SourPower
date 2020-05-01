@@ -1,4 +1,4 @@
-package com.example.sourpowerlisi.ui.home;
+package com.example.sourpower.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,19 +12,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.sourpowerlisi.R;
+import com.example.sourpower.R;
 
-public class HomeFragment extends Fragment {
+public class FavouritesFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private FavouritesViewModel favouritesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        favouritesViewModel =
+                ViewModelProviders.of(this).get(FavouritesViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_favourites, container, false);
+        final TextView textView = root.findViewById(R.id.text_dashboard);
+        favouritesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

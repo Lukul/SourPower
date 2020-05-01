@@ -1,4 +1,4 @@
-package com.example.sourpowerlisi;
+package com.example.sourpower;
 
 import android.content.Context;
 
