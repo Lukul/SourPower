@@ -23,7 +23,7 @@ public class DailySpecFragment extends Fragment {
         dailyspecViewModel =
                 ViewModelProviders.of(this).get(DailySpecViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dailyspec, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+        final TextView textView = root.findViewById(R.id.text_dailyspec);
         dailyspecViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

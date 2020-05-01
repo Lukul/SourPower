@@ -5,5 +5,6 @@
     <string name="title_all">All</string>
     <string name="title_profile">Profile</string>
 
-    <string name="icon_fav">Profile</string>
+    <string name="text_dailyspec">Hallo hier sind daily special</string>
+
 </resources>

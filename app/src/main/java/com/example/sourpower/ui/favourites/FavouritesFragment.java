@@ -23,7 +23,7 @@ public class FavouritesFragment extends Fragment {
         favouritesViewModel =
                 ViewModelProviders.of(this).get(FavouritesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_favourites, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
+        final TextView textView = root.findViewById(R.id.text_favourites);
         favouritesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
