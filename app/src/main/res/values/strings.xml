@@ -5,6 +5,11 @@
     <string name="title_all">All</string>
     <string name="title_profile">Profile</string>
 
+    %do we need????
     <string name="text_dailyspec">Hallo! Hier sind Daily Specials</string>
+
+    % create two themes: flour theme and flower theme
+    <string name="flour_mode">Flour Power</string>
+    <string name="flower_mode">Flower Power</string>
 
 </resources>
