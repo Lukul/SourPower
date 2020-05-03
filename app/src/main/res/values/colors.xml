@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFC0CB</color>
-    <color name="colorPrimaryDark">#E1A6AD</color>
-    <color name="colorAccent">#C9DFEC</color>
+    <color name="colorPrimaryFlower">#FFC0CB</color>
+    <color name="colorPrimaryDarkFlower">#E1A6AD</color>
+    <color name="colorAccentFlower">#C9DFEC</color>
 
     <color name="colorPrimaryFlour">#88807B</color>
     <color name="colorPrimaryDarkFlour">#544C4A</color>
