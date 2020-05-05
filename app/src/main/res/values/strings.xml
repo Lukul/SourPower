@@ -11,5 +11,6 @@
     <string name="flour_mode">Flour Power</string>
     <string name="flower_mode">Flower Power</string>
     <string name="prefs_theme_key">theme</string>
+    <string name="activity_recipe_name">Recipe Activity</string>
 
 </resources>

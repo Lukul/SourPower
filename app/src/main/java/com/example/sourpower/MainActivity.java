@@ -70,5 +70,10 @@ public class MainActivity extends AppCompatActivity {
         ColorSchemeUtility.setTheme(getApplicationContext(), 2);
         recreateActivity();
     }
+
+    public void launchRecipeActivity(View view) {
+        Intent intent = new Intent(this, RecipeActivity.class);
+        startActivity(intent);
+    }
 }
 
