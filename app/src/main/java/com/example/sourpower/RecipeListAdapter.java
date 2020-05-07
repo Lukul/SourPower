@@ -42,7 +42,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         public RecipeViewHolder(View itemView, RecipeListAdapter adapter) {
             super(itemView);
-            recipeItemView = itemView.findViewById(R.id.word);
+            recipeItemView = itemView.findViewById(R.id.recipe_heading);
             this.mAdapter = adapter;
         }
     }
