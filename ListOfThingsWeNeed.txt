@@ -1,0 +1,9 @@
+List of things we need:
+Recycler View for favorites and all tab.
+Search Button for all view on action bar.
+Peeling Papers View for Daily Special.
+Share Recipe Button for all Recipes.
+Upload to Google Home Hub.
+Room (Databank) to store the Recipes.
+Make Recipe Background dynamic with Flour and Flower Theme.
+Notification and Steps to make the bread. Start internal timer or set external timer with label.
