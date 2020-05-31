@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -37,12 +38,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
         String mCurrent = mRecipeList.get(position);
         holder.recipeHeadingView.setText(mCurrent);
-        RequestOptions options = new RequestOptions();
-        //options.transform(new RoundedCorners(4));
+        int valueInPixels = (int) mContext.getResources().getDimensionPixelSize(R.dimen.corner_radius);
         Glide.with(mContext)
-            .load(R.drawable.me_bread_wide)
-            //.apply(options)
-            .into(holder.recipeImageView);
+                .load(R.drawable.me_bread_wide)
+                .transform(new FitCenter(), new RoundedCorners(valueInPixels))
+                .into(holder.recipeImageView);
     }
 
     @Override
