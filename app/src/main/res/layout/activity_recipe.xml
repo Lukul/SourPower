@@ -1,16 +1,126 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RecipeActivity">
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is a recipe" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical"
+        android:padding="9dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="20min"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_diet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_weight="0.5" />
+
+            <TextView
+                android:id="@+id/textView_diet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="vegan"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView_cusine"
+                app:layout_constraintStart_toEndOf="@+id/textView_time"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_cusine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="indian"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textView_diet"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="8dp"
+            android:text="Vegan Chicken Masala yuummy´my"
+            android:textSize="36sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/textView_servings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Servings"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_minus_servings"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:src="@drawable/ic_baseline_remove_24"
+                app:layout_constraintEnd_toStartOf="@id/textView_amount_servings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_servings" />
+
+            <TextView
+                android:id="@+id/textView_amount_servings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textSize="36sp"
+                app:layout_constraintTop_toBottomOf="@+id/textView_servings"
+                app:layout_constraintEnd_toStartOf="@id/button_plus_servings"
+                app:layout_constraintStart_toEndOf="@id/button_minus_servings"
+                tools:layout_editor_absoluteX="187dp" />
+
+            <ImageButton
+                android:id="@+id/button_plus_servings"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:src="@drawable/ic_baseline_add_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView_amount_servings"
+                app:layout_constraintTop_toBottomOf="@+id/textView_servings" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instructions"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
