@@ -1,5 +1,5 @@
 List of things we need:
-Recycler View for favorites and all tab.
+Recycler View for favorites.
 Search Button for all view on action bar.
 Peeling Papers View for Daily Special.
 Share Recipe Button for all Recipes.
