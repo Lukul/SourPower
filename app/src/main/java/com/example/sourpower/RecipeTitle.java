@@ -13,11 +13,21 @@ public class RecipeTitle {
     @ColumnInfo(name = "recipe_title")
     private String recipeTitle;
 
-    public RecipeTitle(@NonNull String recipeTitle) {
+    @NonNull
+    @ColumnInfo(name = "recipe_cover")
+    private Integer recipeCover;
+
+    public RecipeTitle(@NonNull String recipeTitle,
+                       @NonNull Integer recipeCover) {
         this.recipeTitle = recipeTitle;
+        this.recipeCover = recipeCover;
     }
 
-    public String getRecipeTitle() {
+    public String getRecipeTitle(){
         return this.recipeTitle;
+    }
+
+    public Integer getRecipeCover() {
+        return this.recipeCover;
     }
 }

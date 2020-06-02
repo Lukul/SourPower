@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 
 import java.util.List;
+import java.util.Map;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>  {
     private List<RecipeTitle> mRecipeList;
@@ -36,16 +37,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         if (mRecipeList != null) {
             RecipeTitle current = mRecipeList.get(position);
             holder.recipeTitleView.setText(current.getRecipeTitle());
+
+            int valueInPixels = mContext.getResources().getDimensionPixelSize(R.dimen.corner_radius);
+            Glide.with(mContext)
+                    .load(current.getRecipeCover())
+                    .transform(new FitCenter(), new RoundedCorners(valueInPixels))
+                    .into(holder.recipeImageView);
         } else {
             // Covers the case of data not being ready yet.
             holder.recipeTitleView.setText("No recipe available!");
         }
-
-        int valueInPixels = (int) mContext.getResources().getDimensionPixelSize(R.dimen.corner_radius);
-        Glide.with(mContext)
-                .load(R.drawable.me_bread_wide)
-                .transform(new FitCenter(), new RoundedCorners(valueInPixels))
-                .into(holder.recipeImageView);
     }
 
     public void setWords(List<RecipeTitle> recipeTitles){
