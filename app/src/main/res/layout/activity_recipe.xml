@@ -122,5 +122,16 @@
             android:text="Instructions"
             android:textSize="24sp" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredients_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
+
 </androidx.core.widget.NestedScrollView>
