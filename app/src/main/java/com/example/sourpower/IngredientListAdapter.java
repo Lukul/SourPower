@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,12 +27,14 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
         this.mContext = context;
     }
     class IngredientViewHolder extends RecyclerView.ViewHolder {
-        public final ImageView ingredientItemView;
+        public final ImageView ingredientImageView;
+        public final TextView ingredientNameView;
         final IngredientListAdapter mAdapter;
 
         public IngredientViewHolder(View itemView, IngredientListAdapter adapter) {
             super(itemView);
-            ingredientItemView = itemView.findViewById(R.id.ingredient);
+            ingredientImageView = itemView.findViewById(R.id.ingredient_image);
+            ingredientNameView = itemView.findViewById(R.id.ingredient_name);
             this.mAdapter = adapter;
         }
     }
@@ -46,10 +49,12 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
 
     @Override
     public void onBindViewHolder(@NonNull IngredientListAdapter.IngredientViewHolder holder, int position) {
+        String mhaha = "fruit";
         Integer mCurrent = mIngredientList.get(position);
+        holder.ingredientNameView.setText(mhaha);
         Glide.with(mContext)
                 .load(mCurrent)
-                .into(holder.ingredientItemView);
+                .into(holder.ingredientImageView);
 
     }
 

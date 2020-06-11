@@ -1,6 +1,7 @@
 package com.example.sourpower;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,6 @@ public class RecipeActivity extends AppCompatActivity {
         mIngredientsRecyclerView = findViewById(R.id.ingredients_recyclerview);
         mIngredientListAdapter = new IngredientListAdapter(this, mIngredientList);
         mIngredientsRecyclerView.setAdapter(mIngredientListAdapter);
-        mIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mIngredientsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
     }
 }
