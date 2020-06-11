@@ -18,10 +18,10 @@ import java.util.LinkedList;
 
 public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAdapter.IngredientViewHolder> {
     private LayoutInflater mInflater;
-    private final LinkedList<Integer> mIngredientList;
+    private final LinkedList<Ingredient> mIngredientList;
     private Context mContext;
 
-    public IngredientListAdapter(Context context, LinkedList<Integer> ingredientPictureList) {
+    public IngredientListAdapter(Context context, LinkedList<Ingredient> ingredientPictureList) {
         mInflater = LayoutInflater.from(context);
         this.mIngredientList = ingredientPictureList;
         this.mContext = context;
@@ -49,11 +49,10 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
 
     @Override
     public void onBindViewHolder(@NonNull IngredientListAdapter.IngredientViewHolder holder, int position) {
-        String mhaha = "fruit";
-        Integer mCurrent = mIngredientList.get(position);
-        holder.ingredientNameView.setText(mhaha);
+        Ingredient mCurrent = mIngredientList.get(position);
+        holder.ingredientNameView.setText(mCurrent.getName());
         Glide.with(mContext)
-                .load(mCurrent)
+                .load(mCurrent.getImage())
                 .into(holder.ingredientImageView);
 
     }
