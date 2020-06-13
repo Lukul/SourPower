@@ -53,6 +53,7 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
         holder.ingredientNameView.setText(mCurrent.getName());
         Glide.with(mContext)
                 .load(mCurrent.getImage())
+                .circleCrop()
                 .into(holder.ingredientImageView);
 
     }
