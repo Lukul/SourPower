@@ -52,16 +52,15 @@ public class RecipeActivity extends AppCompatActivity {
         mIngredientsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
         NestedScrollView recipeScrollView = (NestedScrollView)findViewById(R.id.nestedScrollView_recipe);
-        recipeScrollView.setOnTouchListener(new View.OnTouchListener(){
+        recipeScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                int bottomY = view.getBottom();
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                int bottomY = v.getBottom();
                 // Screen will not immediately blur, but only once a third down the screen
-                int scrollY = view.getScrollY() - (int)(bottomY * 0.3);
-                int radius = 100 * scrollY / bottomY;
+                int scrollYDelay = scrollY - (int)(bottomY * 0.3);
+                int radius = 100 * scrollYDelay / bottomY;
                 radius = max(1, min(radius, 25)); // 1 < Radius < 25
                 setBackground(radius);
-                return false;
             }
         });
 
