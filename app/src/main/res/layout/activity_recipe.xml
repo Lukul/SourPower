@@ -1,7 +1,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_recipe_nested_scroll_view"
+    android:id="@+id/nestedScrollView_recipe"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:scrollbars="none">
@@ -10,56 +10,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="9dp">
+        android:padding="8dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/linearLayoutRecipe_fullScreen"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="20min"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/textView_diet"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_weight="0.5" />
-
-            <TextView
-                android:id="@+id/textView_diet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="vegan"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView_cusine"
-                app:layout_constraintStart_toEndOf="@+id/textView_time"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView_cusine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="indian"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_diet"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textView_subtitle"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingTop="8dp"
-            android:text="Vegan Chicken Masala yuummy´my"
-            android:textSize="36sp" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="20min"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"/>
+
+                <TextView
+                    android:id="@+id/textView_diet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="vegan"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"/>
+
+                <TextView
+                    android:id="@+id/textView_cusine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="indian"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="yuummy´my"
+                android:textSize="36sp"
+                android:gravity="top|center_horizontal"/>
+
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

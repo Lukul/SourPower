@@ -5,10 +5,16 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -20,6 +26,8 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.toIntExact;
 
 public class RecipeActivity extends AppCompatActivity {
     private RecyclerView mIngredientsRecyclerView;
@@ -43,18 +51,26 @@ public class RecipeActivity extends AppCompatActivity {
         mIngredientsRecyclerView.setAdapter(mIngredientListAdapter);
         mIngredientsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
-        NestedScrollView recipeScrollView = (NestedScrollView)findViewById(R.id.activity_recipe_nested_scroll_view);
+        NestedScrollView recipeScrollView = (NestedScrollView)findViewById(R.id.nestedScrollView_recipe);
         recipeScrollView.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-                int scrollY = view.getScrollY();
                 int bottomY = view.getBottom();
-                int radius = 50 * scrollY / bottomY;
-                radius = max(1, radius);
+                // Screen will not immediately blur, but only once a third down the screen
+                int scrollY = view.getScrollY() - (int)(bottomY * 0.3);
+                int radius = 100 * scrollY / bottomY;
+                radius = max(1, min(radius, 25)); // 1 < Radius < 25
                 setBackground(radius);
                 return false;
             }
         });
+
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+        int screenHeight = size.y;
+        LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayoutRecipe_fullScreen);
+        ViewGroup.LayoutParams params = layout.getLayoutParams();
+        params.height = screenHeight - getStatusBarHeight() - getActionBarHeight();
     }
 
     public void setBackground(int blurRadius)
@@ -65,12 +81,29 @@ public class RecipeActivity extends AppCompatActivity {
                 .into(new CustomTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                        findViewById(R.id.activity_recipe_nested_scroll_view).setBackground(resource);
+                        findViewById(R.id.nestedScrollView_recipe).setBackground(resource);
                     }
                     @Override
                     public void onLoadCleared(Drawable placeholder) {
-                        findViewById(R.id.activity_recipe_nested_scroll_view).setBackground(placeholder);
+                        findViewById(R.id.nestedScrollView_recipe).setBackground(placeholder);
                     }
                 });
+    }
+
+    public int getStatusBarHeight() {
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            return getResources().getDimensionPixelSize(resourceId);
+        }
+        return 0;
+    }
+
+    public int getActionBarHeight() {
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
+        {
+            return TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+        }
+        return 0;
     }
 }
