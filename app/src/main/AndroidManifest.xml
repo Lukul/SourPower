@@ -11,7 +11,7 @@
         android:theme="@style/Theme.MyApp">
 
         <activity
-            android:name=".RecipeActivity"
+            android:name=".ui.recipe_activity.RecipeActivity"
             android:label = "@string/activity_recipe_name"
             android:parentActivityName=".MainActivity">
             <meta-data

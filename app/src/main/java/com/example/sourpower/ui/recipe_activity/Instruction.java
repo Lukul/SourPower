@@ -1,4 +1,4 @@
-package com.example.sourpower;
+package com.example.sourpower.ui.recipe_activity;
 
 import java.net.URL;
 
