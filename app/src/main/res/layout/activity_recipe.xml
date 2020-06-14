@@ -132,6 +132,11 @@
             android:text="Instructions"
             android:textSize="24sp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/instructions_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

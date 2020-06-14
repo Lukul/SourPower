@@ -3,6 +3,7 @@ package com.example.sourpower;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.res.Resources;
@@ -34,6 +35,10 @@ public class RecipeActivity extends AppCompatActivity {
     private IngredientListAdapter mIngredientListAdapter;
     private final LinkedList<Ingredient> mIngredientList = new LinkedList<>();
 
+    private RecyclerView mInstructionsRecyclerView;
+    private InstructionListAdapter mInstructionsListAdapter;
+    private final LinkedList<Instruction> mInstructionList = new LinkedList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,12 @@ public class RecipeActivity extends AppCompatActivity {
         mIngredientListAdapter = new IngredientListAdapter(this, mIngredientList);
         mIngredientsRecyclerView.setAdapter(mIngredientListAdapter);
         mIngredientsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+
+        mInstructionList.add(new Instruction("cut the apple", R.drawable.apple));
+        mInstructionsRecyclerView = findViewById(R.id.instructions_recyclerview);
+        mInstructionsListAdapter = new InstructionListAdapter(this, mInstructionList);
+        mInstructionsRecyclerView.setAdapter(mInstructionsListAdapter);
+        mInstructionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         NestedScrollView recipeScrollView = (NestedScrollView)findViewById(R.id.nestedScrollView_recipe);
         recipeScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
