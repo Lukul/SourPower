@@ -41,20 +41,20 @@
     <!--theme attributes, see https://www.youtube.com/watch?v=Owkf8DhAOSo-->
 
     <!--Color palette-->
-    <color name="pink_200">#F48FB1</color> <!--Color primary (dark)-->
-    <color name="pink_500">#E91E63</color> <!--Color primary (light)-->
-    <color name="pink_600">#D81B60</color> <!--Color primary variant (dark)-->
-    <color name="pink_700">#C2185B</color> <!--Color primary variant (light)-->
+    <color name="orange_300">#ff7543</color> <!--Color primary (dark)-->
+    <color name="orange_800">#d84315</color> <!--Color primary (light)-->
+    <color name="orange_500">#ff5622</color> <!--Color primary variant (dark)-->
+    <color name="orange_600">#f4501e</color> <!--Color primary variant (light)-->
 
-    <color name="green_200">#1ee9a5</color> <!--Color secondary-->
-    <color name="green_500">#00d97c</color> <!--Color secondary variant-->
+    <color name="green_200">#388e3c</color> <!--Color secondary-->
+    <color name="green_500">#00600f</color> <!--Color secondary variant-->
 
     <color name="red_200">#cf6679</color> <!--Color error (dark)-->
     <color name="red_600">#b00020</color> <!--Color error (light)-->
 
     <!--Color surface (light), color on error (light), -->
     <!--color on surface (dark), color on surface (dark)-->
-    <color name="white_50">#ffffff</color>
+    <color name="green_50">#f0f6e6</color>
 
     <color name="black_800">#121212</color> <!--Color surface (dark)-->
     <!--Color on secondary (light), color on background (light),-->

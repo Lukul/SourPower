@@ -30,7 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="42dp">
+                android:paddingTop="16dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_cake_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -43,27 +49,21 @@
                     android:textAppearance="?textAppearanceHeadline6"
                     android:textColor="@color/material_on_surface_emphasis_high_type"
                     android:textStyle="bold" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_cake_black_24dp" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/theme_name_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:background="@android:color/transparent"
                 android:hint="@string/weekly_heading"
                 android:imeOptions="actionDone"
                 android:inputType="textCapWords"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:textAppearance="?textAppearanceHeadline4"
+                android:textAppearance="?textAppearanceHeadline5"
                 android:textColor="@color/material_on_surface_emphasis_high_type"
                 tools:ignore="TextViewEdits" />
 

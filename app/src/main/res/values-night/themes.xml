@@ -18,8 +18,8 @@
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
     <style name="Theme.MyApp" parent="Base.Theme.MyApp">
         <!--Material color attributes (dark theme) -->
-        <item name="colorPrimary">@color/pink_200</item>
-        <item name="colorPrimaryVariant">@color/pink_600</item>
+        <item name="colorPrimary">@color/orange_300</item>
+        <item name="colorPrimaryVariant">@color/orange_500</item>
         <item name="colorSecondary">@color/green_200</item>
         <item name="colorSecondaryVariant">@color/green_500</item>
         <item name="android:colorBackground">@color/black_900</item>
@@ -27,8 +27,8 @@
         <item name="colorError">@color/red_200</item>
         <item name="colorOnPrimary">@color/black_900</item>
         <item name="colorOnSecondary">@color/black_900</item>
-        <item name="colorOnBackground">@color/white_50</item>
-        <item name="colorOnSurface">@color/white_50</item>
+        <item name="colorOnBackground">@color/green_50</item>
+        <item name="colorOnSurface">@color/green_50</item>
         <item name="colorOnError">@color/black_900</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
