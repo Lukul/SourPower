@@ -33,10 +33,6 @@ public class RecipeActivity extends AppCompatActivity {
     private final LinkedList<Ingredient> mIngredientList = new LinkedList<>();
     private final LinkedList<Instruction> mInstructionList = new LinkedList<>();
 
-    private RecyclerView mInstructionsRecyclerView;
-    private InstructionListAdapter mInstructionsListAdapter;
-    private final LinkedList<Instruction> mInstructionList = new LinkedList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +51,10 @@ public class RecipeActivity extends AppCompatActivity {
         mIngredientsRecyclerView.setAdapter(mIngredientListAdapter);
         mIngredientsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
 
-        mInstructionList.add(new Instruction("Cut the Apple in pieces.", "https://lh3.googleusercontent.com/ZdV_LHWBOnDZ9jYUvS3Q0aCVSQo7u6AccnEB_CDIDSFbQXwInGkIR3YGeEnLoM82X1esSr8cQuSt0VowTkJFOfrpOGTRpsqcKHsiNOMD_Iv3UV0VygLDY-Irrv-qvexRWHdwvprRFV-4M9hbJ-1aBCWVovUb25zR25jeT4S-hhCbWau6NLuWK0HwoVPniJ87quWfQDdul6Rg3f7rCX4xO_bJ9uY2ba0XLpIu31if5VrxYzjLBBE5XMZBz_RSM16jhIDPZCts9OuwDn3Z48hh4f0jkU_wEZpo9xT0DFKtafLTFCoxIYda75_tTuZW7dkuRcaUg5dl379PkVu810ULE-DFSjYtIk2sqiquHZ0hlhCLOTcV78x7vdm8h4Dk0FWxQVK6ot7ObD-MMMILZOVcLVxvwBhcXT6d35lDnEzzBpOP91XlzyD4GIQ4p10b8gABt7MpxPV2faidTfJuFtQOE9ePt72tP1qFO2Ki8M_BbrAE-JhhhiF-fjNnsnPb7iUZ-GuCrje6j-yMmTQWiQoZczsgG_AGtgUkZ_kaU9W-Tu1krZce8abJy_zhB3WY0ZFHctklhdFzRemzgQMvBhwOdk8JVOPPCpRdUe4cUZlDZWvAJykl1F7nZyXkCbsJTEHjZNUWkPlt1Y1gtEizgdOSH5hfQSH12I0vDPqUN2BeOHDyb7FgsKj0fQaWC_eqOg=w1599-h900-no?authuser=0"));
-        mInstructionList.add(new Instruction("Cut the Banana in pieces.", "https://drive.google.com/file/d/1aGDotsdCQ30ZcmiyBvo_d14zdsUDwlMa/view?usp=sharing"));
-        mInstructionList.add(new Instruction("Cut the Banana in pieces.", "https://i.imgur.com/y6b7eZX.jpg"));
+        //https://help.dropbox.com/files-folders/share/force-download
+        mInstructionList.add(new Instruction("Cut the Apple in pieces.", "https://www.dropbox.com/s/yazlkl75im1pwdy/DSCN4343.JPG?dl=1"));
+        mInstructionList.add(new Instruction("Cut the Banana in pieces.", "https://www.dropbox.com/s/mfqz318mm6rn5jd/DSCN4346.JPG?dl=1"));
+        mInstructionList.add(new Instruction("Cut the Banana in pieces.", "https://www.dropbox.com/s/dmzdj9bumu79v6t/DSCN4355.JPG?dl=1"));
 
 
         mInstructionsRecyclerView = findViewById(R.id.instructions_recyclerview);
