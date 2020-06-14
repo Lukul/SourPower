@@ -8,11 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +32,9 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class RecipeActivity extends AppCompatActivity {
+    private final static int THEME_FLOUR = 1;
+    private final static int THEME_FLOWER = 2;
+
     private RecyclerView mIngredientsRecyclerView;
     private RecyclerView mInstructionsRecyclerView;
     private IngredientListAdapter mIngredientListAdapter;
@@ -43,6 +50,7 @@ public class RecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        updateTheme();
         setContentView(R.layout.activity_recipe);
         setBackground(1, 0);
         mIngredientList.add(new Ingredient("Apple", R.drawable.apple));
