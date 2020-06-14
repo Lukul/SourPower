@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/navigation_dailyspec"
         android:name="com.example.sourpower.ui.dailyspec.DailySpecFragment"
-        android:label="@string/title_dailyspec"
+        android:label="@string/weekly_navigation"
         tools:layout="@layout/fragment_dailyspec" />
 
     <fragment

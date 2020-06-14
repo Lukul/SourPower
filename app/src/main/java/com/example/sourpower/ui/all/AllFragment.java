@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,11 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sourpower.R;
-import com.example.sourpower.RecipeListAdapter;
-import com.example.sourpower.RecipeTitle;
-import com.example.sourpower.RecipeViewModel;
+import com.example.sourpower.recipe.RecipeListAdapter;
+import com.example.sourpower.recipe.RecipeTitle;
+import com.example.sourpower.recipe.RecipeViewModel;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class AllFragment extends Fragment {

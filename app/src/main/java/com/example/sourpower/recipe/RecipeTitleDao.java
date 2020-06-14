@@ -1,4 +1,4 @@
-package com.example.sourpower;
+package com.example.sourpower.recipe;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

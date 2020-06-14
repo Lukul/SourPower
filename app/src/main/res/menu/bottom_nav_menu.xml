@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_dailyspec"
         android:icon="@drawable/ic_dailyspec_black_24dp"
-        android:title="@string/title_dailyspec" />
+        android:title="@string/weekly_navigation" />
 
     <item
         android:id="@+id/navigation_favourites"

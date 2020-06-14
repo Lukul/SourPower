@@ -5,12 +5,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 
+import com.example.sourpower.ui.recipe_activity.RecipeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -33,13 +32,14 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_dailyspec, R.id.navigation_favourites, R.id.navigation_all, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
 
     public void updateTheme() {
         if (ColorSchemeUtility.getTheme(getApplicationContext()) <= THEME_FLOUR) {
-            setTheme(R.style.AppThemeFlour);
+            setTheme(R.style.Theme_MyApp);
+            //setTheme(R.style.AppThemeFlour);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkFlour));
