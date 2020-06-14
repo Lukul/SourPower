@@ -33,6 +33,10 @@ public class RecipeActivity extends AppCompatActivity {
     private final LinkedList<Ingredient> mIngredientList = new LinkedList<>();
     private final LinkedList<Instruction> mInstructionList = new LinkedList<>();
 
+    private RecyclerView mInstructionsRecyclerView;
+    private InstructionListAdapter mInstructionsListAdapter;
+    private final LinkedList<Instruction> mInstructionList = new LinkedList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
