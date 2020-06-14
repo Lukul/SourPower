@@ -1,4 +1,4 @@
-package com.example.sourpower.ui.recipe_activity;
+package com.example.sourpower;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
@@ -8,17 +8,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.sourpower.R;
 
 import java.util.LinkedList;
 
@@ -29,6 +34,9 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class RecipeActivity extends AppCompatActivity {
+    private final static int THEME_FLOUR = 1;
+    private final static int THEME_FLOWER = 2;
+
     private RecyclerView mIngredientsRecyclerView;
     private RecyclerView mInstructionsRecyclerView;
     private IngredientListAdapter mIngredientListAdapter;
@@ -44,6 +52,7 @@ public class RecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        updateTheme();
         setContentView(R.layout.activity_recipe);
         setBackground(1, 0);
         mIngredientList.add(new Ingredient("Apple", R.drawable.apple));
@@ -127,15 +136,50 @@ public class RecipeActivity extends AppCompatActivity {
         return 0;
     }
 
+
     private ColorMatrixColorFilter getWhiteningFilter(float intensity)
     {
         float brightness = maxAddedBrightness * intensity;
         float brightnessMatrix[] =
                 {   1 - (float)0.5 * intensity, 0, 0, 0, brightness,
-                    0, 1 - (float)0.5 * intensity, 0, 0, brightness,
-                    0, 0, 1- (float)0.5 * intensity, 0, brightness,
-                    0, 0, 0, 1 - (float)0.5 * intensity, 0 };
+                        0, 1 - (float)0.5 * intensity, 0, 0, brightness,
+                        0, 0, 1- (float)0.5 * intensity, 0, brightness,
+                        0, 0, 0, 1 - (float)0.5 * intensity, 0 };
         ColorMatrix colorMatrixBrightness = new ColorMatrix(brightnessMatrix);
         return new ColorMatrixColorFilter(colorMatrixBrightness);
+    }
+
+    public void updateTheme() {
+        if (ColorSchemeUtility.getTheme(getApplicationContext()) <= THEME_FLOUR) {
+            setTheme(R.style.AppThemeFlour);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkFlour));
+            }
+        } else if (ColorSchemeUtility.getTheme(getApplicationContext()) == THEME_FLOWER) {
+            setTheme(R.style.AppThemeFlower);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkFlower));
+            }
+        }
+    }
+    public void recreateActivity() {
+        Intent intent = getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
+
+    public void FlourThemeChange(View view) {
+        ColorSchemeUtility.setTheme(getApplicationContext(), 1);
+        recreateActivity();
+    }
+
+    public void FlowerThemeChange(View view) {
+        ColorSchemeUtility.setTheme(getApplicationContext(), 2);
+        recreateActivity();
     }
 }
