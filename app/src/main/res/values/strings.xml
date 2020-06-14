@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">SourPower</string>
-    <string name="weekly_navigation">Weekly</string>
-    <string name="title_fav">Favourites</string>
-    <string name="title_all">All</string>
-    <string name="title_profile">Profile</string>
+    <string name="weekly_nav_label">Weekly</string>
+    <string name="favorites_nav_label">Favourites</string>
+    <string name="all_nav_label">All</string>
+    <string name="profile_nav_label">Profile</string>
 
     <string name="text_dailyspec">Hallo! Hier sind Daily Specials</string>
 
@@ -11,7 +11,11 @@
     <string name="flour_mode">Flour Power</string>
     <string name="flower_mode">Flower Power</string>
     <string name="prefs_theme_key">theme</string>
-    <string name="activity_recipe_name">Recipe Activity</string>
-    <string name="weekly_heading">Weekly Specials</string>
 
+    <string name="activity_recipe_name">Recipe Activity</string>
+
+    <string name="weekly_title">Weekly Specials</string>
+    <string name="all_title">All Recipes</string>
+    <string name="profile_title">Your Profile</string>
+    <string name="favorites_title">Saved Favorites</string>
 </resources>

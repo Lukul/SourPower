@@ -3,8 +3,10 @@ package com.example.sourpower;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.sourpower.ui.recipe_activity.RecipeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_dailyspec, R.id.navigation_favourites, R.id.navigation_all, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
 
@@ -74,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
     public void launchRecipeActivity(View view) {
         Intent intent = new Intent(this, RecipeActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void setTitle(int titleId) {
+        TextView allTitleTextView = findViewById(R.id.fragment_title);
+        allTitleTextView.setText(titleId);
     }
 }
 

@@ -8,25 +8,25 @@
 
     <fragment
         android:id="@+id/navigation_dailyspec"
-        android:name="com.example.sourpower.ui.dailyspec.DailySpecFragment"
-        android:label="@string/weekly_navigation"
+        android:name="com.example.sourpower.ui.weekly.WeeklySpecialsFragment"
+        android:label="@string/weekly_nav_label"
         tools:layout="@layout/fragment_dailyspec" />
 
     <fragment
         android:id="@+id/navigation_favourites"
         android:name="com.example.sourpower.ui.favourites.FavouritesFragment"
-        android:label="@string/title_fav"
+        android:label="@string/favorites_nav_label"
         tools:layout="@layout/fragment_favourites" />
 
     <fragment
         android:id="@+id/navigation_all"
         android:name="com.example.sourpower.ui.all.AllFragment"
-        android:label="@string/title_all"
+        android:label="@string/all_nav_label"
         tools:layout="@layout/fragment_all" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.sourpower.ui.profile.ProfileFragment"
-        android:label="@string/title_profile"
+        android:label="@string/profile_nav_label"
         tools:layout="@layout/fragment_profile" />
 </navigation>

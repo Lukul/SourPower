@@ -30,6 +30,7 @@ public class FavouritesFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        getActivity().setTitle(R.string.favorites_title);
         return root;
     }
 }

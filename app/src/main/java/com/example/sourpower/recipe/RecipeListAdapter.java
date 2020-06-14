@@ -37,6 +37,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         if (mRecipeList != null) {
             RecipeTitle current = mRecipeList.get(position);
             holder.recipeTitleView.setText(current.getRecipeTitle());
+            holder.recipeSubTitleView.setText("Crunchy but also soft");
 
             int valueInPixels = mContext.getResources().getDimensionPixelSize(R.dimen.corner_radius);
             Glide.with(mContext)
@@ -65,12 +66,14 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     class RecipeViewHolder extends RecyclerView.ViewHolder {
         public final TextView recipeTitleView;
+        public final TextView recipeSubTitleView;
         public final ImageView recipeImageView;
         final RecipeListAdapter mAdapter;
 
         public RecipeViewHolder(View itemView, RecipeListAdapter adapter) {
             super(itemView);
-            recipeTitleView = itemView.findViewById(R.id.recipe_heading);
+            recipeTitleView = itemView.findViewById(R.id.recipe_title);
+            recipeSubTitleView = itemView.findViewById(R.id.recipe_subtitle);
             recipeImageView = itemView.findViewById(R.id.recipe_image);
             this.mAdapter = adapter;
         }
