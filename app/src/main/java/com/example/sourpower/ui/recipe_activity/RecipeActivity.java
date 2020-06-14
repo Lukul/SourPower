@@ -1,4 +1,4 @@
-package com.example.sourpower;
+package com.example.sourpower.ui.recipe_activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
@@ -24,6 +24,8 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.sourpower.ColorSchemeUtility;
+import com.example.sourpower.R;
 
 import java.util.LinkedList;
 
