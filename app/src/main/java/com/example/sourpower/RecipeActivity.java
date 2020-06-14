@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -33,11 +35,16 @@ public class RecipeActivity extends AppCompatActivity {
     private final LinkedList<Ingredient> mIngredientList = new LinkedList<>();
     private final LinkedList<Instruction> mInstructionList = new LinkedList<>();
 
+    private final double blurDelayScreenLengthNormalized = 0.3;
+    private final int blurRadiusSpeed = 30;
+    private final int maxBlurRadius = 15;
+    private final int maxAddedBrightness = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
-        setBackground(1);
+        setBackground(1, 0);
         mIngredientList.add(new Ingredient("Apple", R.drawable.apple));
         mIngredientList.add(new Ingredient("Kiwi", R.drawable.kiwi));
         mIngredientList.add(new Ingredient("Cherry", R.drawable.cherry));
@@ -68,10 +75,11 @@ public class RecipeActivity extends AppCompatActivity {
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 int bottomY = v.getBottom();
                 // Screen will not immediately blur, but only once a third down the screen
-                int scrollYDelay = scrollY - (int)(bottomY * 0.3);
-                int radius = 100 * scrollYDelay / bottomY;
-                radius = max(1, min(radius, 25)); // 1 < Radius < 25
-                setBackground(radius);
+                int scrollYWithDelay = scrollY - (int)(bottomY * blurDelayScreenLengthNormalized);
+                int radius = blurRadiusSpeed * scrollYWithDelay / bottomY;
+                float whiteningIntensity = min((float)scrollYWithDelay / bottomY, 1);
+                radius = max(1, min(radius, maxBlurRadius));
+                setBackground(radius, whiteningIntensity);
             }
         });
 
@@ -83,7 +91,7 @@ public class RecipeActivity extends AppCompatActivity {
         params.height = screenHeight - getStatusBarHeight() - getActionBarHeight();
     }
 
-    public void setBackground(int blurRadius)
+    public void setBackground(int blurRadius, float whiteningIntensity)
     {
         Glide.with(this)
                 .load(R.drawable.fruit_salad)
@@ -91,6 +99,7 @@ public class RecipeActivity extends AppCompatActivity {
                 .into(new CustomTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                        resource.setColorFilter(getWhiteningFilter(whiteningIntensity));
                         findViewById(R.id.nestedScrollView_recipe).setBackground(resource);
                     }
                     @Override
@@ -100,7 +109,7 @@ public class RecipeActivity extends AppCompatActivity {
                 });
     }
 
-    public int getStatusBarHeight() {
+    private int getStatusBarHeight() {
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
             return getResources().getDimensionPixelSize(resourceId);
@@ -108,12 +117,24 @@ public class RecipeActivity extends AppCompatActivity {
         return 0;
     }
 
-    public int getActionBarHeight() {
+    private int getActionBarHeight() {
         TypedValue tv = new TypedValue();
         if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
         {
             return TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
         }
         return 0;
+    }
+
+    private ColorMatrixColorFilter getWhiteningFilter(float intensity)
+    {
+        float brightness = maxAddedBrightness * intensity;
+        float brightnessMatrix[] =
+                {   1 - (float)0.5 * intensity, 0, 0, 0, brightness,
+                    0, 1 - (float)0.5 * intensity, 0, 0, brightness,
+                    0, 0, 1- (float)0.5 * intensity, 0, brightness,
+                    0, 0, 0, 1 - (float)0.5 * intensity, 0 };
+        ColorMatrix colorMatrixBrightness = new ColorMatrix(brightnessMatrix);
+        return new ColorMatrixColorFilter(colorMatrixBrightness);
     }
 }
