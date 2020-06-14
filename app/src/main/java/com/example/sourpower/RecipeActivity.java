@@ -3,16 +3,13 @@ package com.example.sourpower;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -27,12 +24,14 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
-import static java.lang.Math.toIntExact;
 
 public class RecipeActivity extends AppCompatActivity {
     private RecyclerView mIngredientsRecyclerView;
+    private RecyclerView mInstructionsRecyclerView;
     private IngredientListAdapter mIngredientListAdapter;
+    private InstructionListAdapter mInstructionListAdapter;
     private final LinkedList<Ingredient> mIngredientList = new LinkedList<>();
+    private final LinkedList<Instruction> mInstructionList = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +45,21 @@ public class RecipeActivity extends AppCompatActivity {
         mIngredientList.add(new Ingredient("Watermelon", R.drawable.watermelon));
         mIngredientList.add(new Ingredient("Strawberry", R.drawable.strawberry));
         mIngredientList.add(new Ingredient("Lemon", R.drawable.lemon));
+
         mIngredientsRecyclerView = findViewById(R.id.ingredients_recyclerview);
         mIngredientListAdapter = new IngredientListAdapter(this, mIngredientList);
         mIngredientsRecyclerView.setAdapter(mIngredientListAdapter);
         mIngredientsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+
+        mInstructionList.add(new Instruction("Cut the Apple in pieces.", "https://lh3.googleusercontent.com/ZdV_LHWBOnDZ9jYUvS3Q0aCVSQo7u6AccnEB_CDIDSFbQXwInGkIR3YGeEnLoM82X1esSr8cQuSt0VowTkJFOfrpOGTRpsqcKHsiNOMD_Iv3UV0VygLDY-Irrv-qvexRWHdwvprRFV-4M9hbJ-1aBCWVovUb25zR25jeT4S-hhCbWau6NLuWK0HwoVPniJ87quWfQDdul6Rg3f7rCX4xO_bJ9uY2ba0XLpIu31if5VrxYzjLBBE5XMZBz_RSM16jhIDPZCts9OuwDn3Z48hh4f0jkU_wEZpo9xT0DFKtafLTFCoxIYda75_tTuZW7dkuRcaUg5dl379PkVu810ULE-DFSjYtIk2sqiquHZ0hlhCLOTcV78x7vdm8h4Dk0FWxQVK6ot7ObD-MMMILZOVcLVxvwBhcXT6d35lDnEzzBpOP91XlzyD4GIQ4p10b8gABt7MpxPV2faidTfJuFtQOE9ePt72tP1qFO2Ki8M_BbrAE-JhhhiF-fjNnsnPb7iUZ-GuCrje6j-yMmTQWiQoZczsgG_AGtgUkZ_kaU9W-Tu1krZce8abJy_zhB3WY0ZFHctklhdFzRemzgQMvBhwOdk8JVOPPCpRdUe4cUZlDZWvAJykl1F7nZyXkCbsJTEHjZNUWkPlt1Y1gtEizgdOSH5hfQSH12I0vDPqUN2BeOHDyb7FgsKj0fQaWC_eqOg=w1599-h900-no?authuser=0"));
+        mInstructionList.add(new Instruction("Cut the Banana in pieces.", "https://drive.google.com/file/d/1aGDotsdCQ30ZcmiyBvo_d14zdsUDwlMa/view?usp=sharing"));
+        mInstructionList.add(new Instruction("Cut the Banana in pieces.", "https://i.imgur.com/y6b7eZX.jpg"));
+
+
+        mInstructionsRecyclerView = findViewById(R.id.instructions_recyclerview);
+        mInstructionListAdapter = new InstructionListAdapter(this, mInstructionList);
+        mInstructionsRecyclerView.setAdapter(mInstructionListAdapter);
+        mInstructionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         NestedScrollView recipeScrollView = (NestedScrollView)findViewById(R.id.nestedScrollView_recipe);
         recipeScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
