@@ -7,9 +7,12 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -68,12 +71,18 @@ public class AllFragment extends Fragment {
                     }
 
                     @Override
-                    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
+                                            @NonNull RecyclerView.ViewHolder viewHolder, float dX,
+                                            float dY, int actionState, boolean isCurrentlyActive) {
                         DisplayMetrics displaymetrics = new DisplayMetrics();
                         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
                         float maxMovementWidth = displaymetrics.widthPixels / 4f;
-                        dX = getPosition(min(dX / maxMovementWidth, 1)) * maxMovementWidth;
-                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                        AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
+                        dX = interpolator.getInterpolation(min(dX / maxMovementWidth, 1)) * maxMovementWidth;
+
+                        final View card = ((RecipeListAdapter.RecipeViewHolder) viewHolder).getCard();
+                        ViewCompat.setElevation(viewHolder.itemView, 8);
+                        getDefaultUIUtil().onDraw(c, recyclerView, card, dX, dY, actionState, isCurrentlyActive);
                     }
 
                     @Override
@@ -98,10 +107,5 @@ public class AllFragment extends Fragment {
         mSwipeToLike.attachToRecyclerView(mRecyclerView);
 
         return root;
-    }
-
-    private float getPosition (float x) {
-        //Used to slow the movement near to 1 (max swipe position)
-        return (float) (x + Math.sin(Math.PI * x) / Math.PI);
     }
 }

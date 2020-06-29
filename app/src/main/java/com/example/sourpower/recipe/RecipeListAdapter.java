@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.sourpower.R;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
@@ -36,17 +37,17 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
         if (mRecipeList != null) {
             RecipeTitle current = mRecipeList.get(position);
-            holder.recipeTitleView.setText(current.getRecipeTitle());
-            holder.recipeSubTitleView.setText("Crunchy but also soft");
+            holder.mRecipeTitleView.setText(current.getRecipeTitle());
+            holder.mRecipeSubTitleView.setText("Crunchy but also soft");
 
             int valueInPixels = mContext.getResources().getDimensionPixelSize(R.dimen.corner_radius);
             Glide.with(mContext)
                     .load(current.getRecipeCover())
                     .transform(new FitCenter(), new RoundedCorners(valueInPixels))
-                    .into(holder.recipeImageView);
+                    .into(holder.mRecipeImageView);
         } else {
             // Covers the case of data not being ready yet.
-            holder.recipeTitleView.setText("No recipe available!");
+            holder.mRecipeTitleView.setText("No recipe available!");
         }
     }
 
@@ -64,18 +65,25 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         else return 0;
     }
 
-    class RecipeViewHolder extends RecyclerView.ViewHolder {
-        public final TextView recipeTitleView;
-        public final TextView recipeSubTitleView;
-        public final ImageView recipeImageView;
+    public class RecipeViewHolder extends RecyclerView.ViewHolder {
+        public final MaterialCardView mRecipeCardView;
+        public final TextView mRecipeTitleView;
+        public final TextView mRecipeSubTitleView;
+        public final ImageView mRecipeImageView;
         final RecipeListAdapter mAdapter;
 
         public RecipeViewHolder(View itemView, RecipeListAdapter adapter) {
             super(itemView);
-            recipeTitleView = itemView.findViewById(R.id.recipe_title);
-            recipeSubTitleView = itemView.findViewById(R.id.recipe_subtitle);
-            recipeImageView = itemView.findViewById(R.id.recipe_image);
+            mRecipeCardView = itemView.findViewById(R.id.card);
+            mRecipeTitleView = itemView.findViewById(R.id.recipe_title);
+            mRecipeSubTitleView = itemView.findViewById(R.id.recipe_subtitle);
+            mRecipeImageView = itemView.findViewById(R.id.recipe_image);
             this.mAdapter = adapter;
+        }
+
+        public MaterialCardView getCard()
+        {
+            return mRecipeCardView;
         }
     }
 }
