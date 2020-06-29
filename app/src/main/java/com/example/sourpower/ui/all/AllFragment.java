@@ -3,12 +3,12 @@ package com.example.sourpower.ui.all;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Display;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,7 +26,6 @@ import com.example.sourpower.recipe.RecipeTitle;
 import com.example.sourpower.recipe.RecipeViewModel;
 
 import java.util.List;
-import java.util.Objects;
 
 import static java.lang.Math.min;
 
@@ -34,6 +33,8 @@ public class AllFragment extends Fragment {
     private RecipeViewModel mRecipeViewModel;
     private RecyclerView mRecyclerView;
     private RecipeListAdapter mAdapter;
+
+    boolean swiped = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -63,11 +64,9 @@ public class AllFragment extends Fragment {
         ItemTouchHelper mSwipeToLike = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
                     @Override
-                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                        final int fromPos = viewHolder.getAdapterPosition();
-                        final int toPos = target.getAdapterPosition();
-                        // move item in `fromPos` to `toPos` in adapter.
-                        return true;// true if moved, false otherwise
+                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
                     }
 
                     @Override
@@ -78,7 +77,18 @@ public class AllFragment extends Fragment {
                         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
                         float maxMovementWidth = displaymetrics.widthPixels / 4f;
                         AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
-                        dX = interpolator.getInterpolation(min(dX / maxMovementWidth, 1)) * maxMovementWidth;
+                        float relX = dX / maxMovementWidth;
+                        dX = interpolator.getInterpolation(min(relX, 1)) * maxMovementWidth;
+
+                        if (relX >= 1 && !swiped)
+                        {
+                            swiped = true;
+                            animation(viewHolder);
+                        }
+                        if (dX == 0)
+                        {
+                            swiped = false;
+                        }
 
                         final View card = ((RecipeListAdapter.RecipeViewHolder) viewHolder).getCard();
                         ViewCompat.setElevation(viewHolder.itemView, 8);
@@ -105,7 +115,22 @@ public class AllFragment extends Fragment {
                     }
                 });
         mSwipeToLike.attachToRecyclerView(mRecyclerView);
-
         return root;
+    }
+
+    public void animation(@NonNull RecyclerView.ViewHolder viewHolder)
+    {
+        RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
+        final ImageView heart = recipeViewHolder.getFavoriteImageView();
+        if(recipeViewHolder.getFavorite() == false)
+        {
+            recipeViewHolder.setFavorite(true);
+            heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
+        }
+        else
+        {
+            recipeViewHolder.setFavorite(false);
+            heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
+        }
     }
 }

@@ -70,7 +70,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public final TextView mRecipeTitleView;
         public final TextView mRecipeSubTitleView;
         public final ImageView mRecipeImageView;
+        public final ImageView mFavoriteImageView;
         final RecipeListAdapter mAdapter;
+
+        boolean  mFavorite = false;
 
         public RecipeViewHolder(View itemView, RecipeListAdapter adapter) {
             super(itemView);
@@ -78,12 +81,27 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
             mRecipeTitleView = itemView.findViewById(R.id.recipe_title);
             mRecipeSubTitleView = itemView.findViewById(R.id.recipe_subtitle);
             mRecipeImageView = itemView.findViewById(R.id.recipe_image);
+            mFavoriteImageView = itemView.findViewById(R.id.recipe_favorite);
             this.mAdapter = adapter;
         }
 
         public MaterialCardView getCard()
         {
             return mRecipeCardView;
+        }
+
+        public ImageView getFavoriteImageView()
+        {
+            return mFavoriteImageView;
+        }
+
+        public boolean getFavorite()
+        {
+            return mFavorite;
+        }
+
+        public void setFavorite(boolean favorite){
+            mFavorite = favorite;
         }
     }
 }
