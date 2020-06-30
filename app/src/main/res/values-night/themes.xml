@@ -16,7 +16,7 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
-    <style name="Theme.MyApp" parent="Base.Theme.MyApp">
+    <style name="Theme.SourPower" parent="Base.Theme.SourPower">
         <!--Material color attributes (dark theme) -->
         <item name="colorPrimary">@color/orange_300</item>
         <item name="colorPrimaryVariant">@color/orange_500</item>

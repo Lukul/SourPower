@@ -16,9 +16,54 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
-    <style name="Theme.MyApp" parent="Base.Theme.MyApp"/>
+    <style name="Theme.SourPower" parent="Base.Theme.SourPower"/>
+
+    <!--Top level Flour theme to be used in AndroidManifest.xml-->
+    <style name="Theme.Flower" parent="Base.Theme.SourPower">
+        <!--Material color attributes (light theme) -->
+        <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
+        <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
+        <!--selection controls.-->
+        <item name="colorPrimary">@color/colorAccentFlower</item>
+        <item name="colorPrimaryVariant">@color/colorAccentFlowerVariant</item>
+        <item name="colorSecondary">@color/colorPrimaryDarkFlower</item>
+        <item name="colorSecondaryVariant">@color/colorPrimaryDarkFlowerVariant</item>
+        <!--colorBackground appears behind scrollable content and is used for the default window-->
+        <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
+        <!--and menus. colorError is used to indicate an error state for components such as-->
+        <!--text fields.-->
+        <item name="android:colorBackground">@color/colorPrimaryFlower</item>
+        <item name="colorSurface">@color/colorPrimaryFlower</item>
+        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
+        <!--on which they appear.-->
+        <item name="colorOnPrimary">@color/colorPrimaryFlower</item>
+        <item name="colorOnError">@color/colorPrimaryFlower</item>
+    </style>
+
+    <!--Top level Flour theme to be used in AndroidManifest.xml-->
+    <style name="Theme.Flour" parent="Base.Theme.SourPower">
+        <!--Material color attributes (light theme) -->
+        <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
+        <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
+        <!--selection controls.-->
+        <item name="colorPrimary">@color/colorAccentFlour</item>
+        <item name="colorPrimaryVariant">@color/colorAccentFlourVariant</item>
+        <item name="colorSecondary">@color/colorPrimaryDarkFlour</item>
+        <item name="colorSecondaryVariant">@color/colorPrimaryDarkFlourVariant</item>
+        <!--colorBackground appears behind scrollable content and is used for the default window-->
+        <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
+        <!--and menus. colorError is used to indicate an error state for components such as-->
+        <!--text fields.-->
+        <item name="android:colorBackground">@color/colorPrimaryFlour</item>
+        <item name="colorSurface">@color/colorPrimaryFlour</item>
+        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
+        <!--on which they appear.-->
+        <item name="colorOnPrimary">@color/colorPrimaryFlour</item>
+        <item name="colorOnError">@color/colorPrimaryFlour</item>
+    </style>
+
     <!--Base custom theme which will be shared between both light and dark theme variants-->
-    <style name="Base.Theme.MyApp" parent="Base.Theme.MaterialThemeBuilder">
+    <style name="Base.Theme.SourPower" parent="Base.Theme.MaterialThemeBuilder">
         <!--Material color attributes (light theme) -->
         <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
         <!--colorSecondary colors are most often used as accents on components, such as FABs and -->

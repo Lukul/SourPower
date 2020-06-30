@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(ColorSchemeUtility.currentTheme(getApplicationContext()));
         super.onCreate(savedInstanceState);
-        ColorSchemeUtility.updateTheme(getApplicationContext(), getWindow());
         setContentView(R.layout.activity_main);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

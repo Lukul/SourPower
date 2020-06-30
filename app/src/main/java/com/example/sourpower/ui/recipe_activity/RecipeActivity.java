@@ -53,8 +53,8 @@ public class RecipeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(ColorSchemeUtility.currentTheme(getApplicationContext()));
         super.onCreate(savedInstanceState);
-        ColorSchemeUtility.updateTheme(getApplicationContext(), getWindow());
         setContentView(R.layout.activity_recipe);
         setBackground(1, 0);
         mIngredientList.add(new Ingredient("Apple", R.drawable.apple));

@@ -2,14 +2,7 @@ package com.example.sourpower;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.os.Build;
 import android.preference.PreferenceManager;
-import android.util.TypedValue;
-import android.view.Window;
-import android.view.WindowManager;
-
-import androidx.annotation.ColorInt;
 
 public class ColorSchemeUtility {
     public final static int THEME_SOUR_POWER = 0;
@@ -25,34 +18,15 @@ public class ColorSchemeUtility {
         return prefs.getInt(context.getString(R.string.prefs_theme_key), -1);
     }
 
-    public static void updateTheme(Context context, Window window) {
+    public static int currentTheme(Context context) {
         switch (ColorSchemeUtility.getTheme(context))
         {
             case THEME_FLOUR:
-                setTheme(context, R.style.AppThemeFlour);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarkFlour));
-                }
-                break;
+                return R.style.Theme_Flour;
             case THEME_FLOWER:
-                setTheme(context, R.style.AppThemeFlower);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    window.setStatusBarColor(context.getResources().getColor(R.color.colorPrimaryDarkFlower));
-                }
-                break;
+                return R.style.Theme_Flower;
             default:
-                setTheme(context, R.style.Theme_MyApp);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-                    TypedValue typedValue = new TypedValue();
-                    Resources.Theme theme = context.getTheme();
-                    theme.resolveAttribute(R.attr.colorPrimaryDark, typedValue, true);
-                    @ColorInt int color = typedValue.data;
-                    window.setStatusBarColor(color);
-                }
+                return R.style.Theme_SourPower;
         }
     }
 }

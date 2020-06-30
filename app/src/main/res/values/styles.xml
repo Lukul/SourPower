@@ -37,20 +37,4 @@
         <item name="itemTextAppearance">?attr/textAppearanceBody2</item>
     </style>
 
-    <!--TODO: Refactor -->
-    <!-- Base application theme. -->
-    <style name="AppThemeFlower" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryFlower</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkFlower</item>
-        <item name="colorAccent">@color/colorAccentFlower</item>
-    </style>
-
-    <style name="AppThemeFlour" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimaryFlour</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkFlour</item>
-        <item name="colorAccent">@color/colorAccentFlour</item>
-    </style>
-
 </resources>
