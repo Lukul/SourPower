@@ -1,6 +1,7 @@
 package com.example.sourpower.recipe;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,14 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     @Override
     public RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mItemView = mInflater.inflate(R.layout.recipelist_item, parent, false);
-        return new RecipeViewHolder(mItemView, this);
+
+        RecipeListAdapter.RecipeViewHolder viewHolder = new RecipeViewHolder(mItemView, this, new RecipeViewHolder.IRecipeViewHolderClicks() {
+            public void onCard(View caller)
+            {
+                Log.d("VEGETABLES", "Poh-tah-tos");
+            };
+        });
+        return viewHolder;
     }
 
     @Override
@@ -65,7 +73,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         else return 0;
     }
 
-    public class RecipeViewHolder extends RecyclerView.ViewHolder {
+    public static class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final MaterialCardView mRecipeCardView;
         public final TextView mRecipeTitleView;
         public final TextView mRecipeSubTitleView;
@@ -73,16 +81,30 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public final ImageView mFavoriteImageView;
         final RecipeListAdapter mAdapter;
 
-        boolean  mFavorite = false;
+        private boolean  mFavorite = false;
 
-        public RecipeViewHolder(View itemView, RecipeListAdapter adapter) {
+        public IRecipeViewHolderClicks mListener;
+
+        public interface IRecipeViewHolderClicks {
+            public void onCard(View caller);
+        }
+
+        public RecipeViewHolder(View itemView, RecipeListAdapter adapter, IRecipeViewHolderClicks listener) {
             super(itemView);
+            mListener = listener;
+
             mRecipeCardView = itemView.findViewById(R.id.card);
             mRecipeTitleView = itemView.findViewById(R.id.recipe_title);
             mRecipeSubTitleView = itemView.findViewById(R.id.recipe_subtitle);
             mRecipeImageView = itemView.findViewById(R.id.recipe_image);
             mFavoriteImageView = itemView.findViewById(R.id.recipe_favorite);
+            mRecipeCardView.setOnClickListener(this);
             this.mAdapter = adapter;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onCard(v);
         }
 
         public MaterialCardView getCard()

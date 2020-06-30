@@ -80,7 +80,7 @@ public class AllFragment extends Fragment {
                         float relX = dX / maxMovementWidth;
                         dX = interpolator.getInterpolation(min(relX, 1)) * maxMovementWidth;
 
-                        if (relX >= 1 && !swiped)
+                        if (relX >= 0.85f && !swiped)
                         {
                             swiped = true;
                             animation(viewHolder);
