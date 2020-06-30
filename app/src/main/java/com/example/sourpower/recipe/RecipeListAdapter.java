@@ -1,6 +1,7 @@
 package com.example.sourpower.recipe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.sourpower.R;
+import com.example.sourpower.ui.recipe_activity.RecipeActivity;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -35,7 +37,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         RecipeListAdapter.RecipeViewHolder viewHolder = new RecipeViewHolder(mItemView, this, new RecipeViewHolder.IRecipeViewHolderClicks() {
             public void onCard(View caller)
             {
-                Log.d("VEGETABLES", "Poh-tah-tos");
+                Intent intent = new Intent(mContext, RecipeActivity.class);
+                mContext.startActivity(intent);
             };
         });
         return viewHolder;
