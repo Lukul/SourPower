@@ -122,7 +122,7 @@ public class AllFragment extends Fragment {
     {
         RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
         final ImageView heart = recipeViewHolder.getFavoriteImageView();
-        if(recipeViewHolder.getFavorite() == false)
+        if(!recipeViewHolder.getFavorite())
         {
             recipeViewHolder.setFavorite(true);
             heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);

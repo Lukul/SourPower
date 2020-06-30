@@ -54,7 +54,7 @@ public class RecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateTheme();
+        ColorSchemeUtility.updateTheme(getApplicationContext(), getWindow());
         setContentView(R.layout.activity_recipe);
         setBackground(1, 0);
         mIngredientList.add(new Ingredient("Apple", R.drawable.apple));
@@ -151,21 +151,6 @@ public class RecipeActivity extends AppCompatActivity {
         return new ColorMatrixColorFilter(colorMatrixBrightness);
     }
 
-    public void updateTheme() {
-        if (ColorSchemeUtility.getTheme(getApplicationContext()) <= THEME_FLOUR) {
-            setTheme(R.style.AppThemeFlour);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkFlour));
-            }
-        } else if (ColorSchemeUtility.getTheme(getApplicationContext()) == THEME_FLOWER) {
-            setTheme(R.style.AppThemeFlower);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkFlower));
-            }
-        }
-    }
     public void recreateActivity() {
         Intent intent = getIntent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

@@ -1,9 +1,11 @@
 package com.example.sourpower;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.example.sourpower.ui.recipe_activity.RecipeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,13 +21,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
-    private final static int THEME_FLOUR = 1;
-    private final static int THEME_FLOWER = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateTheme();
+        ColorSchemeUtility.updateTheme(getApplicationContext(), getWindow());
         setContentView(R.layout.activity_main);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -37,22 +38,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-    public void updateTheme() {
-        if (ColorSchemeUtility.getTheme(getApplicationContext()) <= THEME_FLOUR) {
-            setTheme(R.style.Theme_MyApp);
-            //setTheme(R.style.AppThemeFlour);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkFlour));
-            }
-        } else if (ColorSchemeUtility.getTheme(getApplicationContext()) == THEME_FLOWER) {
-            setTheme(R.style.AppThemeFlower);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDarkFlower));
-            }
-        }
-    }
     public void recreateActivity() {
         Intent intent = getIntent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -63,12 +48,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void FlourThemeChange(View view) {
-        ColorSchemeUtility.setTheme(getApplicationContext(), 1);
+        ColorSchemeUtility.setTheme(getApplicationContext(), ColorSchemeUtility.THEME_FLOUR);
         recreateActivity();
     }
 
     public void FlowerThemeChange(View view) {
-        ColorSchemeUtility.setTheme(getApplicationContext(), 2);
+        ColorSchemeUtility.setTheme(getApplicationContext(), ColorSchemeUtility.THEME_FLOWER);
+        recreateActivity();
+    }
+
+    public void SourPowerThemeChange(View view) {
+        ColorSchemeUtility.setTheme(getApplicationContext(), ColorSchemeUtility.THEME_SOUR_POWER);
         recreateActivity();
     }
 

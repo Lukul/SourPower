@@ -35,4 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="FlowerThemeChange"/>
+
+    <Button
+        android:id="@+id/sour_power_theme_btn"
+        android:text="SourPower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="SourPowerThemeChange"/>
 </LinearLayout>
