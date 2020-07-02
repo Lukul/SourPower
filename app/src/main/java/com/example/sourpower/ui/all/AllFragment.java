@@ -3,7 +3,6 @@ package com.example.sourpower.ui.all;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -21,9 +21,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sourpower.R;
+import com.example.sourpower.recipe.Recipe;
 import com.example.sourpower.recipe.RecipeListAdapter;
-import com.example.sourpower.recipe.RecipeTitle;
 import com.example.sourpower.recipe.RecipeViewModel;
+import com.example.sourpower.ui.favourites.FavouritesViewModel;
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class AllFragment extends Fragment {
     private RecipeViewModel mRecipeViewModel;
     private RecyclerView mRecyclerView;
     private RecipeListAdapter mAdapter;
+    private FavouritesViewModel mFavouritesViewModel;
+    //set up adapter and pass clicked listener this
 
     boolean swiped = false;
 
@@ -41,7 +44,7 @@ public class AllFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_all, container, false);
 
         // Get a handle to the RecyclerView.
-        mRecyclerView = root.findViewById(R.id.recyclerview);
+        mRecyclerView = root.findViewById(R.id.recyclerview_all);
         // Create an adapter and supply the data to be displayed.
         mAdapter = new RecipeListAdapter(getContext());
         // Connect the adapter with the RecyclerView.
@@ -50,12 +53,13 @@ public class AllFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mRecipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
+        mFavouritesViewModel = new ViewModelProvider(this).get(FavouritesViewModel.class);
 
-        mRecipeViewModel.getAllRecipes().observe(getViewLifecycleOwner(), new Observer<List<RecipeTitle>>() {
+        mRecipeViewModel.getAllRecipes().observe(getViewLifecycleOwner(), new Observer<List<Recipe>>() {
             @Override
-            public void onChanged(@Nullable final List<RecipeTitle> words) {
+            public void onChanged(@Nullable final List<Recipe> recipes) {
                 // Update the cached copy of the words in the adapter.
-                mAdapter.setWords(words);
+                mAdapter.setRecipes(recipes);
             }
         });
 
@@ -84,6 +88,9 @@ public class AllFragment extends Fragment {
                         {
                             swiped = true;
                             animation(viewHolder);
+                            int position = viewHolder.getAdapterPosition();
+                            mFavouritesViewModel.addFavorite(mAdapter.getRecipes().get(position));
+                            mRecipeViewModel.setFavoriteSelection(mFavouritesViewModel.getFavoriteRecipes());
                         }
                         if (dX == 0)
                         {

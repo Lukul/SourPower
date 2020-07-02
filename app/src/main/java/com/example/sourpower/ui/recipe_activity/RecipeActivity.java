@@ -36,8 +36,6 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class RecipeActivity extends AppCompatActivity {
-    private final static int THEME_FLOUR = 1;
-    private final static int THEME_FLOWER = 2;
 
     private RecyclerView mIngredientsRecyclerView;
     private RecyclerView mInstructionsRecyclerView;

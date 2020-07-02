@@ -13,10 +13,10 @@ import com.example.sourpower.R;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {RecipeTitle.class}, version = 2, exportSchema = false)
+@Database(entities = {Recipe.class}, version = 3, exportSchema = false)
 public abstract class RecipeRoomDatabase extends RoomDatabase {
 
-    public abstract RecipeTitleDao wordDao();
+    public abstract RecipeDao wordDao();
 
     private static volatile RecipeRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -48,19 +48,19 @@ public abstract class RecipeRoomDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                RecipeTitleDao dao = INSTANCE.wordDao();
+                RecipeDao dao = INSTANCE.wordDao();
                 dao.deleteAll();
 
-                RecipeTitle recipeTitle =  new RecipeTitle("Mein Brot", R.drawable.me_bread_wide);
-                dao.insert(recipeTitle);
-                recipeTitle = new RecipeTitle("Basic Country Bread", R.drawable.basic_country_bread_wide);
-                dao.insert(recipeTitle);
-                recipeTitle = new RecipeTitle("Bread", R.drawable.bread);
-                dao.insert(recipeTitle);
-                recipeTitle = new RecipeTitle("Cinnamon rolls", R.drawable.cinammon_rolls);
-                dao.insert(recipeTitle);
-                recipeTitle = new RecipeTitle("Granola", R.drawable.granola);
-                dao.insert(recipeTitle);
+                Recipe recipe =  new Recipe("Mein Brot", R.drawable.me_bread_wide);
+                dao.insert(recipe);
+                recipe = new Recipe("Basic Country Bread", R.drawable.basic_country_bread_wide);
+                dao.insert(recipe);
+                recipe = new Recipe("Bread", R.drawable.bread);
+                dao.insert(recipe);
+                recipe = new Recipe("Cinnamon rolls", R.drawable.cinammon_rolls);
+                dao.insert(recipe);
+                recipe = new Recipe("Granola", R.drawable.granola);
+                dao.insert(recipe);
             });
         }
     };

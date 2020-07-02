@@ -6,14 +6,4 @@ package com.example.sourpower.ui.all;
 
 public class AllViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
-
-    public AllViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
-    }
 }

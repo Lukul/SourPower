@@ -2,7 +2,6 @@ package com.example.sourpower.recipe;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.List;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>  {
-    private List<RecipeTitle> mRecipeList;
+    private List<Recipe> mRecipeList;
     private LayoutInflater mInflater;
     private Context mContext;
 
@@ -35,11 +34,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         View mItemView = mInflater.inflate(R.layout.recipelist_item, parent, false);
 
         RecipeListAdapter.RecipeViewHolder viewHolder = new RecipeViewHolder(mItemView, this, new RecipeViewHolder.IRecipeViewHolderClicks() {
-            public void onCard(View caller)
+            public void onCard(View caller, int position)
             {
                 Intent intent = new Intent(mContext, RecipeActivity.class);
                 mContext.startActivity(intent);
             };
+
         });
         return viewHolder;
     }
@@ -47,7 +47,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     @Override
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
         if (mRecipeList != null) {
-            RecipeTitle current = mRecipeList.get(position);
+            Recipe current = mRecipeList.get(position);
             holder.mRecipeTitleView.setText(current.getRecipeTitle());
             holder.mRecipeSubTitleView.setText("Crunchy but also soft");
 
@@ -62,9 +62,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         }
     }
 
-    public void setWords(List<RecipeTitle> recipeTitles){
-        mRecipeList = recipeTitles;
+    public void setRecipes(List<Recipe> recipes){
+        mRecipeList = recipes;
         notifyDataSetChanged();
+    }
+
+    public List<Recipe> getRecipes(){
+        return mRecipeList;
     }
 
     // getItemCount() is called many times, and when it is first called,
@@ -89,7 +93,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public IRecipeViewHolderClicks mListener;
 
         public interface IRecipeViewHolderClicks {
-            public void onCard(View caller);
+            public void onCard(View caller, int position);
         }
 
         public RecipeViewHolder(View itemView, RecipeListAdapter adapter, IRecipeViewHolderClicks listener) {
@@ -106,8 +110,9 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         }
 
         @Override
-        public void onClick(View v) {
-            mListener.onCard(v);
+        public void onClick(View v) 
+        {
+            mListener.onCard(v, getAdapterPosition());
         }
 
         public MaterialCardView getCard()
