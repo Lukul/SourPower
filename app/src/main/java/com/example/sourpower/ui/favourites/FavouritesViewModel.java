@@ -15,40 +15,51 @@ import com.example.sourpower.recipe.Recipe;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FavouritesViewModel extends AndroidViewModel {
-    private final List<String> mFavoriteRecipes = new ArrayList<>();
+    private List<String> mFavoriteRecipes = new ArrayList<>();
+    private final String key = "favorite_recipes";
 
     public FavouritesViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public void addFavorite(Recipe recipe) { mFavoriteRecipes.add(recipe.getRecipeTitle()); }
+    public void addFavorite(Recipe recipe)
+    {
+        retrieveFavoriteRecipes();
+        mFavoriteRecipes.add(recipe.getRecipeTitle());
+        storeFavoriteRecipes();
+    }
 
     public List<String> getFavoriteRecipes()
     {
-        mFavoriteRecipes.add("Mein Brot");
+        retrieveFavoriteRecipes();
         return mFavoriteRecipes;
     }
 
-    public void addRecipe(String title)
+    private void storeFavoriteRecipes()
     {
         //Set the values
         Gson gson = new Gson();
         String jsonText = gson.toJson(mFavoriteRecipes);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("key", jsonText);
+        editor.putString(key, jsonText);
         editor.apply();
     }
 
-    public void removeRecipe(String title)
+    private void retrieveFavoriteRecipes()
     {
         //Retrieve the values
         Gson gson = new Gson();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplication());
-        String jsonText = preferences.getString("key", null);
-        String[] text = gson.fromJson(jsonText, String[].class);  //EDIT: gso to gson
+        if(preferences.contains(key))
+        {
+            String jsonText = preferences.getString(key, null);
+            String[] text = gson.fromJson(jsonText, String[].class);  //EDIT: gso to gson
+            mFavoriteRecipes = new ArrayList<>(Arrays.asList(text));
+        }
     }
 }
