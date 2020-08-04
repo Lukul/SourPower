@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -90,7 +89,7 @@ public class AllFragment extends Fragment {
                             animation(viewHolder);
                             int position = viewHolder.getAdapterPosition();
                             mFavouritesViewModel.addFavorite(mAdapter.getRecipes().get(position));
-                            mRecipeViewModel.setFavoriteSelection(mFavouritesViewModel.getFavoriteRecipes());
+                            mRecipeViewModel.setSelection(mFavouritesViewModel.getFavoriteRecipes());
                         }
                         if (dX == 0)
                         {

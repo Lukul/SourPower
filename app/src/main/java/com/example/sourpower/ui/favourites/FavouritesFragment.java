@@ -40,7 +40,7 @@ public class FavouritesFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
         mFavouritesViewModel = new ViewModelProvider(this).get(FavouritesViewModel.class);
-        mRecipeViewModel.setFavoriteSelection(mFavouritesViewModel.getFavoriteRecipes());
+        mRecipeViewModel.setSelection(mFavouritesViewModel.getFavoriteRecipes());
         mRecipeViewModel.getSearchBy().observe(getViewLifecycleOwner(), new Observer<List<Recipe>>() {
             @Override
             public void onChanged(@Nullable final List<Recipe> recipes) {

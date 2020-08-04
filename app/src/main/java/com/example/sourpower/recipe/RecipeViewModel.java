@@ -15,22 +15,23 @@ public class RecipeViewModel extends AndroidViewModel {
     private LiveData<List<Recipe>> mAllRecipes;
     private LiveData<List<Recipe>> searchByLiveData;
     private MutableLiveData<List<String>> filterLiveData = new MutableLiveData<>();
-    private List<String> mFavoriteSelection = new ArrayList<>();
+    private List<String> mSelection = new ArrayList<>();
 
     public RecipeViewModel(Application application) {
         super(application);
         mRepository = new RecipeTitleRepository(application);
         mAllRecipes = mRepository.getAllRecipes();
         searchByLiveData = Transformations.switchMap(filterLiveData,
-                selection -> mRepository.searchBy(mFavoriteSelection));
+                selection -> mRepository.searchBy(mSelection));
     }
 
     public LiveData<List<Recipe>> getSearchBy() { return searchByLiveData; }
-    public void setFavoriteSelection(List<String> selection)
+    public void setSelection(List<String> selection)
     {
-        mFavoriteSelection = selection;
-        filterLiveData.setValue(mFavoriteSelection);
+        mSelection = selection;
+        filterLiveData.setValue(mSelection);
     }
+
     public LiveData<List<Recipe>> getAllRecipes() {
         return mAllRecipes;
     }

@@ -10,7 +10,7 @@
         android:id="@+id/navigation_dailyspec"
         android:name="com.example.sourpower.ui.weekly.WeeklySpecialsFragment"
         android:label="@string/weekly_nav_label"
-        tools:layout="@layout/fragment_dailyspec" />
+        tools:layout="@layout/fragment_weekly_specials" />
 
     <fragment
         android:id="@+id/navigation_favourites"
