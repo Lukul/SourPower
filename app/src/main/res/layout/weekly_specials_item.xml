@@ -9,7 +9,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+        android:id="@+id/weekly_specials_swipecard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
@@ -23,18 +23,18 @@
             <!-- Media -->
 
             <ImageView
-                android:id="@+id/recipe_image"
+                android:id="@+id/weekly_specials_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/recipe_title1"
+                android:layout_alignBottom="@id/weekly_specials_title"
                 android:scaleType="centerCrop"
-                app:layout_constraintBottom_toTopOf="@+id/recipe_subtitle"
+                app:layout_constraintBottom_toTopOf="@+id/weekly_specials_subtitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/recipe_subtitle"
+                android:id="@+id/weekly_specials_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceBody2"
@@ -44,12 +44,12 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/recipe_title1"
+                android:id="@+id/weekly_specials_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/recipe_image"
+                android:layout_alignTop="@id/weekly_specials_image"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                app:layout_constraintBottom_toTopOf="@+id/recipe_subtitle"
+                app:layout_constraintBottom_toTopOf="@+id/weekly_specials_subtitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
