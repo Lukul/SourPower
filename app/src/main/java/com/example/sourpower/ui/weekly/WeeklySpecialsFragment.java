@@ -1,11 +1,14 @@
 package com.example.sourpower.ui.weekly;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,55 +23,45 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 
 import com.example.sourpower.recipe.Recipe;
-import com.example.sourpower.recipe.RecipeListAdapter;
 import com.example.sourpower.recipe.RecipeViewModel;
 
+
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class WeeklySpecialsFragment extends Fragment {
 
     private RecipeViewModel mRecipeViewModel;
-    private RecipeListAdapter mRecipeListAdapter;
-    private Recipe recipe;
-
     private WeeklySpecialsViewModel mWeeklySpecialsViewModel;
 
     private ArrayList<String> mWeeklySpecials;
-    private ArrayAdapter<String> mArrayAdapter;
+    private ArrayAdapter<Recipe> mArrayAdapter;
     private int i;
-
+    private WeeklySpecialsAdapter mWeeklySpecialsAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        mRecipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
-
-        mWeeklySpecialsViewModel = ViewModelProviders.of(this).get(WeeklySpecialsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_weekly_specials, container, false);
-
 
         mRecipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
         mWeeklySpecialsViewModel = new ViewModelProvider(this).get(WeeklySpecialsViewModel.class);
-        mWeeklySpecials = new ArrayList<>();
-        mWeeklySpecials.add("Mein Brot");
-        mWeeklySpecials.add("Basic Country Bread");
-        mRecipeViewModel.setSelection(mWeeklySpecials);
+        mWeeklySpecialsAdapter = new WeeklySpecialsAdapter(getActivity());
+
+        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) root.findViewById(R.id.frame);
+        flingContainer.setAdapter(mWeeklySpecialsAdapter);
+
+        mWeeklySpecialsViewModel.addWeeklySpecials("Mein Brot");
+        mWeeklySpecialsViewModel.addWeeklySpecials("Basic Country Bread");
+        mRecipeViewModel.setSelection(mWeeklySpecialsViewModel.getWeeklySpecialsRecipes());
         mRecipeViewModel.getSearchBy().observe(getViewLifecycleOwner(), new Observer<List<Recipe>>() {
             @Override
             public void onChanged(@Nullable final List<Recipe> recipes) {
                 // Update the cached copy of the words in the adapter.
-                mArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.weekly_specials_item, R.id.recipe_title1, mWeeklySpecials);
+                mWeeklySpecialsAdapter.setRecipes(recipes);
             }
         });
-
         getActivity().setTitle(R.string.weekly_title);
 
-        mArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.weekly_specials_item, R.id.recipe_title1, mWeeklySpecials);
-
-
-        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) root.findViewById(R.id.frame);
-        flingContainer.setAdapter(mArrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
@@ -95,7 +88,7 @@ public class WeeklySpecialsFragment extends Fragment {
             public void onAdapterAboutToEmpty(int itemsInAdapter) {
                 // Ask for more data here
                 //al.add("XML ".concat(String.valueOf(i)));
-                mArrayAdapter.notifyDataSetChanged();
+                mWeeklySpecialsAdapter.notifyDataSetChanged();
                 Log.d("LIST", "notified");
                 i++;
             }

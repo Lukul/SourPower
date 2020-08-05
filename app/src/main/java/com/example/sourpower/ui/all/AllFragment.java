@@ -1,12 +1,18 @@
 package com.example.sourpower.ui.all;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -123,20 +129,43 @@ public class AllFragment extends Fragment {
         mSwipeToLike.attachToRecyclerView(mRecyclerView);
         return root;
     }
+    public static void ImageViewAnimatedChange(Context c, final ImageView v, final int new_image) {
+        final Animation anim_out = AnimationUtils.loadAnimation(c, android.R.anim.fade_out);
+        final Animation anim_in  = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
+        anim_out.setAnimationListener(new Animation.AnimationListener()
+        {
+            @Override public void onAnimationStart(Animation animation)
+            {
+                v.setImageResource(new_image);
+                anim_in.setAnimationListener(new Animation.AnimationListener() {
+                    @Override public void onAnimationStart(Animation animation) {}
+                    @Override public void onAnimationRepeat(Animation animation) {}
+                    @Override public void onAnimationEnd(Animation animation) {}
+                });
+                v.startAnimation(anim_in);
+            }
+            @Override public void onAnimationRepeat(Animation animation) {}
+            @Override public void onAnimationEnd(Animation animation) {}
+        });
+        v.startAnimation(anim_out);
+    }
 
     public void animation(@NonNull RecyclerView.ViewHolder viewHolder)
     {
         RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
-        final ImageView heart = recipeViewHolder.getFavoriteImageView();
+        ImageView heart = recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
         if(!recipeViewHolder.getFavorite())
         {
+            ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_favourites_black_24dp);
             recipeViewHolder.setFavorite(true);
             heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
         }
         else
         {
+            ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_baseline_favorite_border_24);
             recipeViewHolder.setFavorite(false);
             heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
         }
     }
+
 }

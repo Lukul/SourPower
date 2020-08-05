@@ -14,17 +14,17 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/green_200"
+            app:cardBackgroundColor="?android:colorPrimary"
             android:layout_margin="8dp"
             app:cardElevation="0dp"
             app:cardCornerRadius="4dp">
 
             <ImageView
-                android:id="@+id/recipe_favorite"
+                android:id="@+id/recipe_favorite_border"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="30dp"
-                app:srcCompat="@drawable/ic_favourites_black_24dp" />
+                app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
