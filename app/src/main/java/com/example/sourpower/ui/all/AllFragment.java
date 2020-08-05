@@ -89,6 +89,8 @@ public class AllFragment extends Fragment {
                         float relX = dX / maxMovementWidth;
                         dX = interpolator.getInterpolation(min(relX, 1)) * maxMovementWidth;
 
+                        RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
+
                         if (relX >= 0.85f && !swiped)
                         {
                             swiped = true;
