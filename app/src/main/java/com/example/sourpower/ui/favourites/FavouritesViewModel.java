@@ -33,7 +33,7 @@ public class FavouritesViewModel extends AndroidViewModel {
         storeFavoriteRecipes();
     }
 
-    public void deleteFavoriteRecipes(Recipe recipe){
+    public void deleteFavorite(Recipe recipe){
         retrieveFavoriteRecipes();
         mFavoriteRecipes.remove(recipe.getRecipeTitle());
         storeFavoriteRecipes();

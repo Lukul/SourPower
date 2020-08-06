@@ -95,9 +95,7 @@ public class AllFragment extends Fragment {
                         {
                             swiped = true;
                             animation(viewHolder);
-                            int position = viewHolder.getAdapterPosition();
-                            mFavouritesViewModel.addFavorite(mAdapter.getRecipes().get(position));
-                            mRecipeViewModel.setSelection(mFavouritesViewModel.getFavoriteRecipes());
+
                         }
                         if (dX == 0)
                         {
@@ -161,12 +159,18 @@ public class AllFragment extends Fragment {
             ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_favourites_black_24dp);
             recipeViewHolder.setFavorite(true);
             heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
+            int position = viewHolder.getAdapterPosition();
+            mFavouritesViewModel.addFavorite(mAdapter.getRecipes().get(position));
+            mRecipeViewModel.setSelection(mFavouritesViewModel.getFavoriteRecipes());
         }
         else
         {
             ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_baseline_favorite_border_24);
             recipeViewHolder.setFavorite(false);
             heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
+            int position = viewHolder.getAdapterPosition();
+            mFavouritesViewModel.deleteFavorite(mAdapter.getRecipes().get(position));
+            mRecipeViewModel.setSelection(mFavouritesViewModel.getFavoriteRecipes());
         }
     }
 
