@@ -31,6 +31,8 @@ import com.example.sourpower.recipe.RecipeListAdapter;
 import com.example.sourpower.recipe.RecipeViewModel;
 import com.example.sourpower.ui.favourites.FavouritesViewModel;
 
+import org.xml.sax.helpers.XMLReaderFactory;
+
 import java.util.List;
 
 import static java.lang.Math.min;
@@ -40,13 +42,33 @@ public class AllFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecipeListAdapter mAdapter;
     private FavouritesViewModel mFavouritesViewModel;
-    //set up adapter and pass clicked listener this
+    private static boolean swiped;
+    //public static boolean mFavorite;
 
-    boolean swiped = false;
+    //set up adapter and pass clicked listener this
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            //Restore the fragment's state here
+            swiped = savedInstanceState.getBoolean("SWIPED");
+            //mFavorite = savedInstanceState.getBoolean("FAVORITE");
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //Save the fragment's state here
+        outState.putBoolean("SWIPED", swiped);
+        //outState.putBoolean("FAVORITE", mFavorite);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_all, container, false);
+        setRetainInstance(true);
+
 
         // Get a handle to the RecyclerView.
         mRecyclerView = root.findViewById(R.id.recyclerview_all);
@@ -154,22 +176,23 @@ public class AllFragment extends Fragment {
     {
         RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
         ImageView heart = recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
-        if(!recipeViewHolder.getFavorite())
+
+        List<String> favorites = mFavouritesViewModel.getFavoriteRecipes();
+        int position = viewHolder.getAdapterPosition();
+        Recipe current = mAdapter.getRecipes().get(position);
+        boolean isFavorite = favorites.contains(current.getRecipeTitle());
+        if(!isFavorite)
         {
             ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_favourites_black_24dp);
-            recipeViewHolder.setFavorite(true);
             heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
-            int position = viewHolder.getAdapterPosition();
-            mFavouritesViewModel.addFavorite(mAdapter.getRecipes().get(position));
+            mFavouritesViewModel.addFavorite(current);
             mRecipeViewModel.setSelection(mFavouritesViewModel.getFavoriteRecipes());
         }
         else
         {
             ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_baseline_favorite_border_24);
-            recipeViewHolder.setFavorite(false);
             heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
-            int position = viewHolder.getAdapterPosition();
-            mFavouritesViewModel.deleteFavorite(mAdapter.getRecipes().get(position));
+            mFavouritesViewModel.deleteFavorite(current);
             mRecipeViewModel.setSelection(mFavouritesViewModel.getFavoriteRecipes());
         }
     }

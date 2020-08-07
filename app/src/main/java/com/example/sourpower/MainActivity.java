@@ -10,17 +10,20 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.example.sourpower.ui.all.AllFragment;
 import com.example.sourpower.ui.recipe_activity.RecipeActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+    private Fragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+
+        if (savedInstanceState != null) {
+            //Restore the fragment's instance
+            mFragment = getSupportFragmentManager().getFragment(savedInstanceState, "AllFragment");
+        }
     }
 
     public void recreateActivity() {
@@ -71,6 +79,14 @@ public class MainActivity extends AppCompatActivity {
     public void setTitle(int titleId) {
         TextView allTitleTextView = findViewById(R.id.fragment_title);
         allTitleTextView.setText(titleId);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save the fragment's instance
+        getSupportFragmentManager().putFragment(outState, "AllFragment", mFragment);
     }
 }
 

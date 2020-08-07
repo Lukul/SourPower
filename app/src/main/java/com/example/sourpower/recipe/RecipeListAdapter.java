@@ -8,12 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.sourpower.R;
+import com.example.sourpower.ui.all.AllFragment;
 import com.example.sourpower.ui.recipe_activity.RecipeActivity;
 import com.google.android.material.card.MaterialCardView;
 
@@ -23,6 +28,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     private List<Recipe> mRecipeList;
     private LayoutInflater mInflater;
     private Context mContext;
+
 
     public RecipeListAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
@@ -47,7 +53,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     @Override
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
         if (mRecipeList != null) {
-            Recipe current = mRecipeList.get(position);
+            final Recipe current = mRecipeList.get(position);
             holder.mRecipeTitleView.setText(current.getRecipeTitle());
             holder.mRecipeSubTitleView.setText("Crunchy but also soft");
 
@@ -88,8 +94,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public ImageView mFavoriteImageView;
         final RecipeListAdapter mAdapter;
 
-        private boolean  mFavorite = false;
-
         public IRecipeViewHolderClicks mListener;
 
         public interface IRecipeViewHolderClicks {
@@ -111,6 +115,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         @Override
         public void onClick(View v) 
         {
+
             mListener.onCard(v, getAdapterPosition());
         }
 
@@ -123,15 +128,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         {
             mFavoriteImageView = itemView.findViewById(drawable);
             return mFavoriteImageView;
-        }
-
-        public boolean getFavorite()
-        {
-            return mFavorite;
-        }
-
-        public void setFavorite(boolean favorite){
-            mFavorite = favorite;
         }
     }
 }
