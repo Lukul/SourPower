@@ -73,6 +73,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         notifyDataSetChanged();
     }
 
+    public void removeRecipe(Recipe toDelete)
+    {
+        mRecipeList.remove(toDelete);
+    }
+
     public List<Recipe> getRecipes(){
         return mRecipeList;
     }
