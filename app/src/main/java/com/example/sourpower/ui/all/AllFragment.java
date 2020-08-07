@@ -48,23 +48,7 @@ public class AllFragment extends Fragment {
     //public static boolean mFavorite;
 
     //set up adapter and pass clicked listener this
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-            //Restore the fragment's state here
-            swiped = savedInstanceState.getBoolean("SWIPED");
-            //mFavorite = savedInstanceState.getBoolean("FAVORITE");
-        }
-    }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //Save the fragment's state here
-        outState.putBoolean("SWIPED", swiped);
-        //outState.putBoolean("FAVORITE", mFavorite);
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -124,6 +108,7 @@ public class AllFragment extends Fragment {
                             ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_favourites_black_24dp);
                             heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(0);
                         }
+
                         DisplayMetrics displaymetrics = new DisplayMetrics();
                         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
                         float maxMovementWidth = displaymetrics.widthPixels / 4f;

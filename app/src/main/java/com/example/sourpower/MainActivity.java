@@ -40,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
 
-        if (savedInstanceState != null) {
-            //Restore the fragment's instance
-            mFragment = getSupportFragmentManager().getFragment(savedInstanceState, "AllFragment");
-        }
     }
 
     public void recreateActivity() {
@@ -81,12 +77,6 @@ public class MainActivity extends AppCompatActivity {
         allTitleTextView.setText(titleId);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
 
-        //Save the fragment's instance
-        getSupportFragmentManager().putFragment(outState, "AllFragment", mFragment);
-    }
 }
 
