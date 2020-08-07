@@ -42,7 +42,9 @@ public class AllFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecipeListAdapter mAdapter;
     private FavouritesViewModel mFavouritesViewModel;
-    private static boolean swiped;
+    private boolean swiped;
+    private ImageView heart;
+    private RecipeListAdapter.RecipeViewHolder recipeViewHolder;
     //public static boolean mFavorite;
 
     //set up adapter and pass clicked listener this
@@ -104,14 +106,30 @@ public class AllFragment extends Fragment {
                     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                             @NonNull RecyclerView.ViewHolder viewHolder, float dX,
                                             float dY, int actionState, boolean isCurrentlyActive) {
+
+                        RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
+                        heart = recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
+                        recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
+                        List<String> favorites = mFavouritesViewModel.getFavoriteRecipes();
+                        int position = recipeViewHolder.getAdapterPosition();
+                        Recipe current = mAdapter.getRecipes().get(position);
+                        boolean isFavorite = favorites.contains(current.getRecipeTitle());
+                        if(!isFavorite)
+                        {
+                            ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_baseline_favorite_border_24);
+                            heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(0);
+                        }
+                        else
+                        {
+                            ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_favourites_black_24dp);
+                            heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(0);
+                        }
                         DisplayMetrics displaymetrics = new DisplayMetrics();
                         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
                         float maxMovementWidth = displaymetrics.widthPixels / 4f;
                         AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
                         float relX = dX / maxMovementWidth;
                         dX = interpolator.getInterpolation(min(relX, 1)) * maxMovementWidth;
-
-                        RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
 
                         if (relX >= 0.85f && !swiped)
                         {
@@ -175,7 +193,7 @@ public class AllFragment extends Fragment {
     public void animation(@NonNull RecyclerView.ViewHolder viewHolder)
     {
         RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
-        ImageView heart = recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
+        heart = recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
 
         List<String> favorites = mFavouritesViewModel.getFavoriteRecipes();
         int position = viewHolder.getAdapterPosition();

@@ -97,7 +97,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public IRecipeViewHolderClicks mListener;
 
         public interface IRecipeViewHolderClicks {
-            public void onCard(View caller, int position);
+            void onCard(View caller, int position);
         }
 
         public RecipeViewHolder(View itemView, RecipeListAdapter adapter, IRecipeViewHolderClicks listener) {
