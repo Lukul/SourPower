@@ -38,6 +38,7 @@ public class FavouritesFragment extends Fragment {
     private FavouritesViewModel mFavouritesViewModel;
     private ImageView heart;
     private boolean swiped;
+    boolean clearView = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -73,16 +74,37 @@ public class FavouritesFragment extends Fragment {
                     }
 
                     @Override
+                    public void clearView (RecyclerView recyclerView,
+                                           RecyclerView.ViewHolder viewHolder)
+                    {
+                        if(clearView)
+                        {
+                            int position = viewHolder.getAdapterPosition();
+                            Recipe current = mAdapter.getRecipes().get(position);
+                            mFavouritesViewModel.deleteFavorite(current);
+                            mAdapter.removeRecipe(current);
+                            mAdapter.notifyItemRemoved(position);
+                            clearView = false;
+                        }
+                    }
+
+                    @Override
                     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                             @NonNull RecyclerView.ViewHolder viewHolder, float dX,
                                             float dY, int actionState, boolean isCurrentlyActive) {
 
                         RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
                         heart = recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
-                        recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
 
-                        ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_favourites_black_24dp);
-                        heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(0);
+                        if (clearView) {
+                            heart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                            heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(0);
+                        }
+                        else
+                        {
+                            heart.setImageResource(R.drawable.ic_favourites_black_24dp);
+                            heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(0);
+                        }
 
                         DisplayMetrics displaymetrics = new DisplayMetrics();
                         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -91,24 +113,19 @@ public class FavouritesFragment extends Fragment {
                         float relX = dX / maxMovementWidth;
                         dX = interpolator.getInterpolation(min(relX, 1)) * maxMovementWidth;
 
-                        boolean clearView = false;
                         if (relX >= 0.85f && !swiped)
                         {
                             swiped = true;
-                            clearView = animation(viewHolder);
+                            animation(viewHolder);
 
                         }
                         if (dX == 0)
                         {
                             swiped = false;
                         }
-
-                        if(!clearView)
-                        {
-                            final View card = ((RecipeListAdapter.RecipeViewHolder) viewHolder).getCard();
-                            ViewCompat.setElevation(viewHolder.itemView, 8);
-                            getDefaultUIUtil().onDraw(c, recyclerView, card, dX, dY, actionState, isCurrentlyActive);
-                        }
+                        final View card = ((RecipeListAdapter.RecipeViewHolder) viewHolder).getCard();
+                        ViewCompat.setElevation(viewHolder.itemView, 8);
+                        getDefaultUIUtil().onDraw(c, recyclerView, card, dX, dY, actionState, isCurrentlyActive);
                     }
 
                     @Override
@@ -155,31 +172,14 @@ public class FavouritesFragment extends Fragment {
         v.startAnimation(anim_out);
     }
 
-    public boolean animation(@NonNull RecyclerView.ViewHolder viewHolder)
+    public void animation(@NonNull RecyclerView.ViewHolder viewHolder)
     {
         RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
         heart = recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
 
-        List<String> favorites = mFavouritesViewModel.getFavoriteRecipes();
-        int position = viewHolder.getAdapterPosition();
-        Recipe current = mAdapter.getRecipes().get(position);
-        boolean isFavorite = favorites.contains(current.getRecipeTitle());
-        if(!isFavorite)
-        {
-            ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_favourites_black_24dp);
-            heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
-            mFavouritesViewModel.addFavorite(current);
-            mRecipeViewModel.setSelection(mFavouritesViewModel.getFavoriteRecipes());
-            return false;
-        }
-        else
-        {
-            ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_baseline_favorite_border_24);
-            heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
-            mFavouritesViewModel.deleteFavorite(current);
-            mAdapter.removeRecipe(current);
-            mAdapter.notifyItemRemoved(position);
-            return true;
-        }
+        ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_baseline_favorite_border_24);
+        heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(100);
+        heart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        clearView = true;
     }
 }

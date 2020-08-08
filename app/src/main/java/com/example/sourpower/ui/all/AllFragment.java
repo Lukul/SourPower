@@ -44,11 +44,6 @@ public class AllFragment extends Fragment {
     private FavouritesViewModel mFavouritesViewModel;
     private boolean swiped;
     private ImageView heart;
-    private RecipeListAdapter.RecipeViewHolder recipeViewHolder;
-    //public static boolean mFavorite;
-
-    //set up adapter and pass clicked listener this
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -93,19 +88,19 @@ public class AllFragment extends Fragment {
 
                         RecipeListAdapter.RecipeViewHolder recipeViewHolder = (RecipeListAdapter.RecipeViewHolder) viewHolder;
                         heart = recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
-                        recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border);
+
                         List<String> favorites = mFavouritesViewModel.getFavoriteRecipes();
                         int position = recipeViewHolder.getAdapterPosition();
                         Recipe current = mAdapter.getRecipes().get(position);
                         boolean isFavorite = favorites.contains(current.getRecipeTitle());
                         if(!isFavorite)
                         {
-                            ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_baseline_favorite_border_24);
+                            heart.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                             heart.animate().scaleX(1f).scaleY(1f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(0);
                         }
                         else
                         {
-                            ImageViewAnimatedChange(getActivity(), recipeViewHolder.getFavoriteImageView(R.id.recipe_favorite_border), R.drawable.ic_favourites_black_24dp);
+                            heart.setImageResource(R.drawable.ic_favourites_black_24dp);
                             heart.animate().scaleX(1.5f).scaleY(1.5f).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(0);
                         }
 
