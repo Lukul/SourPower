@@ -50,7 +50,7 @@ public class RecipeActivity extends AppCompatActivity {
     private final int maxBlurRadius = 15;
     private final int maxAddedBrightness = 100;
 
-    private int mServings;
+    private int mServings = 2;
     private TextView mServingsText;
 
     @Override
@@ -183,6 +183,7 @@ public class RecipeActivity extends AppCompatActivity {
             case R.id.button_minus_servings:
                 //Decrement the score and update the TextView
                 mServings--;
+                if (mServings < 0) { mServings = 0;}
                 mServingsText.setText(String.valueOf(mServings));
                 break;
         }
@@ -195,6 +196,7 @@ public class RecipeActivity extends AppCompatActivity {
             case R.id.button_plus_servings:
                 //Decrement the score and update the TextView
                 mServings++;
+                if (mServings < 0) { mServings = 0;}
                 mServingsText.setText(String.valueOf(mServings));
                 break;
         }
