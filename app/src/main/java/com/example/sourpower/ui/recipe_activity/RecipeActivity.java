@@ -55,13 +55,13 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         setBackground(1, 0);
-        mIngredientList.add(new Ingredient("Apple", R.drawable.apple));
-        mIngredientList.add(new Ingredient("Kiwi", R.drawable.kiwi));
-        mIngredientList.add(new Ingredient("Cherry", R.drawable.cherry));
-        mIngredientList.add(new Ingredient("Orange", R.drawable.orange));
-        mIngredientList.add(new Ingredient("Watermelon", R.drawable.watermelon));
-        mIngredientList.add(new Ingredient("Strawberry", R.drawable.strawberry));
-        mIngredientList.add(new Ingredient("Lemon", R.drawable.lemon));
+        mIngredientList.add(new Ingredient("Apple", 2, "", R.drawable.apple));
+        mIngredientList.add(new Ingredient("Kiwi", 1, "",  R.drawable.kiwi));
+        mIngredientList.add(new Ingredient("Cherry", 500, "g", R.drawable.cherry));
+        mIngredientList.add(new Ingredient("Orange", 3, "", R.drawable.orange));
+        mIngredientList.add(new Ingredient("Watermelon", 2, "kg", R.drawable.watermelon));
+        mIngredientList.add(new Ingredient("Strawberry", 500, "g", R.drawable.strawberry));
+        mIngredientList.add(new Ingredient("Lemon", 2, "", R.drawable.lemon));
 
         mIngredientsRecyclerView = findViewById(R.id.ingredients_recyclerview);
         mIngredientListAdapter = new IngredientListAdapter(this, mIngredientList);

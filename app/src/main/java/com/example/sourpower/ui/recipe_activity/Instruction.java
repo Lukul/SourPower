@@ -4,22 +4,22 @@ import java.net.URL;
 
 public class Instruction {
     private String mImageURL;
-    private String mText;
+    private String mInstructionText;
     private int mCookingTime;
 
     public Instruction(String text, String imageURL, int cookingTime) {
-        this.mText = text;
+        this.mInstructionText = text;
         this.mImageURL = imageURL;
         this.mCookingTime = cookingTime;
     }
 
     public Instruction(String text, String imageURL) {
-        this.mText = text;
+        this.mInstructionText = text;
         this.mImageURL = imageURL;
     }
 
     public String getText() {
-        return mText;
+        return mInstructionText;
     }
 
     public String getImageURL() {

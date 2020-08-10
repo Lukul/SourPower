@@ -28,12 +28,16 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     class IngredientViewHolder extends RecyclerView.ViewHolder {
         public final ImageView ingredientImageView;
         public final TextView ingredientNameView;
+        public final TextView ingredientAmountView;
+        public final TextView ingredientUnitView;
         final IngredientListAdapter mAdapter;
 
         public IngredientViewHolder(View itemView, IngredientListAdapter adapter) {
             super(itemView);
             ingredientImageView = itemView.findViewById(R.id.ingredient_image);
             ingredientNameView = itemView.findViewById(R.id.ingredient_name);
+            ingredientAmountView = itemView.findViewById(R.id.ingredient_amount);
+            ingredientUnitView = itemView.findViewById(R.id.ingredient_unit);
             this.mAdapter = adapter;
         }
     }
@@ -50,6 +54,10 @@ public class IngredientListAdapter extends RecyclerView.Adapter<IngredientListAd
     public void onBindViewHolder(@NonNull IngredientListAdapter.IngredientViewHolder holder, int position) {
         Ingredient mCurrent = mIngredientList.get(position);
         holder.ingredientNameView.setText(mCurrent.getName());
+        holder.ingredientUnitView.setText(mCurrent.getUnit());
+        int Amount = mCurrent.getAmount();
+        holder.ingredientAmountView.setText(String.valueOf(Amount));
+
         Glide.with(mContext)
                 .load(mCurrent.getImage())
                 .circleCrop()
