@@ -80,6 +80,7 @@
 
             <ImageButton
                 android:id="@+id/button_minus_servings"
+                android:onClick="decreaseServings"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="8dp"
@@ -102,6 +103,7 @@
 
             <ImageButton
                 android:id="@+id/button_plus_servings"
+                android:onClick="increaseServings"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="8dp"

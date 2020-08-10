@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -49,6 +50,9 @@ public class RecipeActivity extends AppCompatActivity {
     private final int maxBlurRadius = 15;
     private final int maxAddedBrightness = 100;
 
+    private int mServings;
+    private TextView mServingsText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(ColorSchemeUtility.currentTheme(getApplicationContext()));
@@ -62,6 +66,10 @@ public class RecipeActivity extends AppCompatActivity {
         mIngredientList.add(new Ingredient("Watermelon", 2, "kg", R.drawable.watermelon));
         mIngredientList.add(new Ingredient("Strawberry", 500, "g", R.drawable.strawberry));
         mIngredientList.add(new Ingredient("Lemon", 2, "", R.drawable.lemon));
+
+        mServingsText = (TextView)findViewById(R.id.textView_amount_servings);
+
+
 
         mIngredientsRecyclerView = findViewById(R.id.ingredients_recyclerview);
         mIngredientListAdapter = new IngredientListAdapter(this, mIngredientList);
@@ -166,5 +174,29 @@ public class RecipeActivity extends AppCompatActivity {
     public void FlowerThemeChange(View view) {
         ColorSchemeUtility.setTheme(getApplicationContext(), 2);
         recreateActivity();
+    }
+
+    public void decreaseServings(View view) {
+        // Get the ID of the button that was clicked
+        int viewID = view.getId();
+        switch (viewID) {
+            case R.id.button_minus_servings:
+                //Decrement the score and update the TextView
+                mServings--;
+                mServingsText.setText(String.valueOf(mServings));
+                break;
+        }
+    }
+
+    public void increaseServings(View view) {
+        // Get the ID of the button that was clicked
+        int viewID = view.getId();
+        switch (viewID) {
+            case R.id.button_plus_servings:
+                //Decrement the score and update the TextView
+                mServings++;
+                mServingsText.setText(String.valueOf(mServings));
+                break;
+        }
     }
 }
